@@ -55,7 +55,7 @@ class DuoApplicationTests {
 		assertEquals(UserValidateImplementation.validateEmail("user.user@email.com"), true);
 		assertEquals(UserValidateImplementation.validateEmail("user.user@email.com.br"), true);
 		assertEquals(UserValidateImplementation.validateEmail("user.user.@email.com.br"), true);
-		assertEquals(UserValidateImplementation.validateEmail("user@user@email.com"), true);
+		assertEquals(UserValidateImplementation.validateEmail("user@user@email.com"), false);
 		assertEquals(UserValidateImplementation.validateEmail("user@email."), false);
 		assertEquals(UserValidateImplementation.validateEmail("user@.com"), false);
 		assertEquals(UserValidateImplementation.validateEmail("@email.com"), false);
