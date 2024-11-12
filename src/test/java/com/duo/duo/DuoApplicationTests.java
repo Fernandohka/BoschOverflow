@@ -77,7 +77,7 @@ class DuoApplicationTests {
 	}
 
 	@Test
-	void validarComLetra(){
+	void validarEdvComLetra(){
 		assertEquals(UserValidateImplementation.validateEdv("1234567a"), false);
 		assertEquals(UserValidateImplementation.validateEdv("12C4567H"), false);
 		assertEquals(UserValidateImplementation.validateEdv("meuedv"), false);
