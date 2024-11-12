@@ -1,0 +1,92 @@
+token
+login
+criptografia 
+cada 8hrs trocar de projeto
+back
+front
+testes
+
+
+
+
+1 - interface e testes 		(repositório,)		~= (1)
+2 - services e backend 		(jwt, senha)		~= (2.5)
+3 - frontend 			    :(			~= (2.5)
+4 - testes de integração 	(python selenium, QA)	~= (1.5)
+5 - integração back e front 	(javascript)		~= (2.5)
+
+
+
+
+/auth		- Login
+/___		- Criar conta
+/spaces		- Criar uma partição para cada setor
+/permitions	- 
+/questions
+/answers
+
+
+
+USER:
+	POST/user				JSON
+	GET/user?query=_&page=_&size=_
+	POST/auth
+
+SPACES (jwt):
+	GET/spaces?query=_&page=_&size=_
+	POST/spaces
+	DELETE/spaces
+	
+PERMISSIONS (administrador do espaço):
+	POST/permissions
+
+QUESTIONS:
+	GET/question/{spaces}?page=_&size=_
+	GET/question/{id}
+	POST/question
+	DELETE/question/{id}
+
+ANSWER:
+	POST/aswer
+
+	
+
+
+
+	um usuário comum pode criar quantos espaços quiser, e convida as pessoas que quiser
+assim como pode definir administradores de seu espaço.
+	O usuário mesmo que não participe de um espaço ele pode visualizar as perguntas e
+respostas porém não interagir
+
+	deve haver uma tela onde um usuário é selecionado para receber as permissões desejadas
+
+
+
+SENHA:
+	12 caracteres
+	Maiúsculas && minusculas
+	Número 
+
+
+USUARIO:
+	nome
+	edv
+	email
+	senha
+	admin
+
+
+
+TELAS:
+	login
+	registro
+	tela de inicio
+	criar espaço nome especifico
+	tela do espaço
+	tela de abrir questão especifica
+	tela de adicionar membro 
+
+
+
+TREVIS FICARIA FELIZÃO:
+	Mocks na primeira etapa

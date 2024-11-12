@@ -8,6 +8,7 @@ class DuoApplicationTests {
 
 	@Test
 	void contextLoads() {
+		
 	}
 
 }

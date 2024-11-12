@@ -1,0 +1,12 @@
+#1 Fernando e Cristian -
+        Os services feitos de modo a evitar o uso de um repository dentro de um controller, usando os 
+    serviços para fazer essa interação, mesmo que seja uma operação simples.
+        Os parâmetros definidos nos services foram definidos com base no que parecia mais útil visando as 
+    rotas passadas pelo Trevisan, algumas delas estão em 'notes.txt'.
+        Deve haver validação de EDV, talvez com base no tamanho, não tenho certeza se oito digitos é um 
+    padrão, porém os testes aplicados validam se possui exatamente oito, e se todos os caracteres enviados
+    são números.
+        Foi criado um 'findOneByEmailOrEdv' dentro de 'UserRepository' para facilitar a busca na hora de logar
+    independente do método escolhido pelo usuário.
+    
+
