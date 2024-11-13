@@ -7,10 +7,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.duo.duo.dto.Response;
+import com.duo.duo.dto.Token;
+import com.duo.duo.dto.UserDto.LoginDto;
 import com.duo.duo.dto.UserDto.NewUserDto;
 import com.duo.duo.model.User;
 import com.duo.duo.repositories.UserRepository;
 import com.duo.duo.services.EncoderService;
+import com.duo.duo.services.JwtService;
 import com.duo.duo.services.UserService;
 
 public class UserImplementation implements UserService {
@@ -20,6 +23,9 @@ public class UserImplementation implements UserService {
 
     @Autowired
     EncoderService encoder;
+
+    @Autowired
+    JwtService<Token> jwtService;
 
     @Override
     public ResponseEntity<Response<User>> CreateUser(NewUserDto newUserData) {
@@ -55,8 +61,28 @@ public class UserImplementation implements UserService {
     }
 
     @Override
-    public ResponseEntity<Response<User>> Login() {
+    public ResponseEntity<Response<Token>> Login(LoginDto loginData) {
+
+        List<User> users = userRepo.loginMailOrNameOrEDV(loginData.login());
+
+        if (users.isEmpty()) {
+            return new ResponseEntity<>(new Response<>(null, "Usuário não foi encontrado!"), HttpStatus.BAD_REQUEST);
+        }
+
+        User user = users.get(0);
+
+        if (!encoder.validate(loginData.password(), user.getPassword())) {
+            return new ResponseEntity<>(new Response<>(null, "Senha incorreta!"), HttpStatus.BAD_REQUEST);
+        }
+
+        Token token = new Token();
+        token.setId(user.getId());
+
+        String jwt = jwtService.get(token);
+
+        // ! Arrumar depois, há algum erro na hora de enviar a string o jwt
+        // return new ResponseEntity<>(new Response<>(jwt, "Senha incorreta!"), HttpStatus.OK);
+        
         return null;
     }
-    
 }
