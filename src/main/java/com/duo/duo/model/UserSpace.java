@@ -39,7 +39,6 @@ public class UserSpace {
     public void setId(Long id) {
         Id = id;
     }
-    
     public Space getSpace() {
         return space;
     }

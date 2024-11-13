@@ -1,7 +1,6 @@
 package com.duo.duo.filters;
 
 import java.io.IOException;
-import java.util.List;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -27,6 +26,7 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
         
         var jwt = getJwt(request);
+        
         if (jwt == null)
         {
             filterChain.doFilter(request, response);
@@ -52,6 +52,7 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
     
     String getJwt(HttpServletRequest request) {
         String bearerToken = request.getHeader("Authorization");
+        
         if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
             return bearerToken.substring(7);
         }

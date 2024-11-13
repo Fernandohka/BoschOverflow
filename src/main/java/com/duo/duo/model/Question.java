@@ -47,7 +47,6 @@ public class Question {
     public UserSpace getUserSpace() {
         return userSpace;
     }
-
     public void setUserSpace(UserSpace userSpace) {
         this.userSpace = userSpace;
     }
