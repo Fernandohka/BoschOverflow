@@ -12,6 +12,7 @@ public class Answer {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long Id;
+
     @Column
     private String description;
 
@@ -38,7 +39,6 @@ public class Answer {
     public void setDescription(String description) {
         this.description = description;
     }
-    
     public User getUser() {
         return user;
     }

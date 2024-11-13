@@ -22,7 +22,6 @@ public class Space {
     public void setId(Long id) {
         Id = id;
     }
-
     public String getName() {
         return name;
     }
