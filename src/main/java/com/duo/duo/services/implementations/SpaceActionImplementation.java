@@ -39,19 +39,20 @@ public class SpaceActionImplementation implements SpaceActionsService<Response<S
     }
 
     @Override
-    public ResponseEntity<Space> addUser(UserSpace userSpace) {
+    public ResponseEntity<Response<Space>> addUser(UserSpace userSpace) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'addUser'");
     }
 
+
     @Override
-    public ResponseEntity<Space> patchPermission(UserSpace userSpace) {
+    public ResponseEntity<Response<Space>> patchPermission(UserSpace userSpace) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'patchPermission'");
     }
 
     @Override
-    public ResponseEntity<Space> deleteSpace(Space space) {
+    public ResponseEntity<Response<Space>> deleteSpace(Space space) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'deleteSpace'");
     }
