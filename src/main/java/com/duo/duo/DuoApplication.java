@@ -10,3 +10,4 @@ public class DuoApplication {
 		SpringApplication.run(DuoApplication.class, args);
 	}
 }
+ 

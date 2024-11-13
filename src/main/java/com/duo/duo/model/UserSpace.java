@@ -27,24 +27,31 @@ public class UserSpace {
     public Integer getPermissionLevel() {
         return permissionLevel;
     }
+
     public void setPermissionLevel(Integer permissionLevel) {
         this.permissionLevel = permissionLevel;
     }
+
     public Long getId() {
         return Id;
     }
+
     public void setId(Long id) {
         Id = id;
     }
+
     public Space getSpace() {
         return space;
     }
+
     public void setSpace(Space space) {
         this.space = space;
     }
+
     public User getUser() {
         return user;
     }
+    
     public void setUser(User user) {
         this.user = user;
     }
