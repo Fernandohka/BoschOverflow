@@ -7,4 +7,5 @@ import com.duo.duo.model.Space;
 
 @Repository
 public interface SpaceRepository extends JpaRepository<Space, Long>{
+    public Space findByName(String name);
 }
