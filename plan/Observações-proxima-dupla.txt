@@ -1,4 +1,5 @@
 #1 Fernando e Cristian -
+
         Os services feitos de modo a evitar o uso de um repository dentro de um controller, usando os 
     serviços para fazer essa interação, mesmo que seja uma operação simples.
         Os parâmetros definidos nos services foram definidos com base no que parecia mais útil visando as 
@@ -13,6 +14,31 @@
         Sobre 'com.duo.duo.services.implementation.EncoderImplementation' o método 'validate(p1, p2)' na sua 
     implementação é necessário uma revisão da ordem das senhas para a função 'matches()'do 
     'BCryptPasswordEncoder'.
+        Os parâmetros dos services foram pensados para serem um objeto configurado no controller e então 
+    enviado para ser utilizado no seu respectivo service.
+
+
+
+#2 Amilton e Kauane - 
+        _
+
+
+
+#3 Sabrina e Nicolle - 
+        _
+
+
+
+#4 Juan e Ingrid - 
+        _
+
+
+
+#5 Milena, Wallace e Sampaio - 
+        _
+
+
+        
     
 
     
