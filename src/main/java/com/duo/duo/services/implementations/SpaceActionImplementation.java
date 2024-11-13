@@ -30,7 +30,9 @@ public class SpaceActionImplementation implements SpaceActionsService{
     UserRepository userRepo;
 
     @Override
+
     //* recebe uma DTO SpaceCreation (String name) e retorna um Response do tipo <Space> com o Space criado e uma mensagem*/
+
     public ResponseEntity<Response<Space>> postSpace(SpaceCreation space) {
         var found = spaceRepo.findByName(space.name());
 
@@ -56,7 +58,7 @@ public class SpaceActionImplementation implements SpaceActionsService{
 
         * e retorna um Response do tipo <UserSpace> com a permissão criada e uma mensagem
         
-        ? VERIFICAR A MODEL DE "UserSpace" PARA CONFERIR OS NÍVEIS DE PERMISSÃO - USUÁRIO MEMBRO : NÍVEL DE PERMISSÃO (1)
+        ? VERIFICAR A MODEL DE "UserSpace" PARA CONFERIR OS NÍVEIS DE PERMISSÃO - USUÁRIO MEMBRO : NÍVEL DE PERMISSÃO (2)
      */
     
     public ResponseEntity<Response<UserSpace>> addUser(AddUserToSpace userSpace) {
@@ -75,7 +77,7 @@ public class SpaceActionImplementation implements SpaceActionsService{
 
         UserSpace permission = new UserSpace();
 
-        permission.setPermissionLevel(1); //? USUÁRIO MEMBRO - NÍVEL DE PERMISSÃO (1) */
+        permission.setPermissionLevel(2); //? USUÁRIO MEMBRO - NÍVEL DE PERMISSÃO (2) */
         permission.setSpace(found);
         permission.setUser(foundUser);
 
