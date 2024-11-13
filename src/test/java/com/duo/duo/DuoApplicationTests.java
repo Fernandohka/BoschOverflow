@@ -4,7 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import com.duo.duo.model.User;
 
+import com.duo.duo.repositories.UserRepository;
 import com.duo.duo.services.UserValidateService;
 
 @SpringBootTest
@@ -12,6 +14,9 @@ public class DuoApplicationTests {
 
     @Autowired
     UserValidateService userValidateService;
+
+	@Autowired
+	UserRepository userRepository;
 
     
 	@Test
@@ -92,5 +97,11 @@ public class DuoApplicationTests {
 	void validarEdvFuncional(){
 		assertEquals(userValidateService.validateEdv("92904373"), true);
 		assertEquals(userValidateService.validateEdv("92904320"), true);
+	}
+
+	@Test
+	void adicionarUsuario(){
+		// userRepository.tra
+		// User new_user = new User("username", "password", "email@email.com", "12345678");
 	}
 }
