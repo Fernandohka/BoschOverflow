@@ -42,30 +42,39 @@ public class User {
     public Long getId() {
         return Id;
     }
+
     public void setId(Long id) {
         Id = id;
     }
+
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
     public String getMail() {
         return mail;
     }
+
     public void setMail(String mail) {
         this.mail = mail;
     }
+
     public String getPassword() {
         return password;
     }
+
     public void setPassword(String password) {
         this.password = password;
     }
+
     public String getEdv() {
         return edv;
     }
+    
     public void setEdv(String edv) {
         this.edv = edv;
     }

@@ -16,7 +16,7 @@
     'BCryptPasswordEncoder'.
         Os parâmetros dos services foram pensados para serem um objeto configurado no controller e então 
     enviado para ser utilizado no seu respectivo service.
-        Tentamos deixar um teste para criar um usuário mas não deu foi mal desculpa :(
+        Tentamos deixar um teste para criar um usuário mas não deu foi mal desculpa :( - Amilton: Tudo bem :)
 
 
 
