@@ -2,11 +2,18 @@
         Os services feitos de modo a evitar o uso de um repository dentro de um controller, usando os 
     serviços para fazer essa interação, mesmo que seja uma operação simples.
         Os parâmetros definidos nos services foram definidos com base no que parecia mais útil visando as 
-    rotas passadas pelo Trevisan, algumas delas estão em 'notes.txt'.
+    rotas passadas pelo Trevisan, algumas delas estão em 'plan.notes.txt'.
         Deve haver validação de EDV, talvez com base no tamanho, não tenho certeza se oito digitos é um 
     padrão, porém os testes aplicados validam se possui exatamente oito, e se todos os caracteres enviados
     são números.
-        Foi criado um 'findOneByEmailOrEdv' dentro de 'UserRepository' para facilitar a busca na hora de logar
-    independente do método escolhido pelo usuário.
+        Foi criado um 'findOneByEmailOrEdv' dentro de 'com.duo.duo.repositories.UserRepository' para 
+    facilitar a busca na hora de logar independente do método escolhido pelo usuário.
+        Os comentários presentes em 'com.duo.duo.DependencyConfiguration.java' são anotações que fiz durante
+    a explicação em aula, não há certeza que está correto.
+        Sobre 'com.duo.duo.services.implementation.EncoderImplementation' o método 'validate(p1, p2)' na sua 
+    implementação é necessário uma revisão da ordem das senhas para a função 'matches()'do 
+    'BCryptPasswordEncoder'.
+    
+
     
 

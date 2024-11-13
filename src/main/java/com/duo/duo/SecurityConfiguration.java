@@ -24,13 +24,13 @@ public class SecurityConfiguration {
         return http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(authorize -> authorize
-                // .requestMatchers("/user","/login").permitAll()
+                // .requestMatchers("/user","/login").permitAll()                                                           //Quando houver verificação de rotas: DESCOMENTE E CONFIGURE
                 .anyRequest()
-                // .authenticated()
-                .permitAll()
+                // .authenticated()                                                                                         //Quando houver verificação de rotas: DESCOMENTE
+                .permitAll()                                                                                                //Quando houver verificação de rotas: COMENTE
                 
             )
-            // .addFilterBefore(new JWTAuthenticationFilter(jwtService), UsernamePasswordAuthenticationFilter.class)
+            // .addFilterBefore(new JWTAuthenticationFilter(jwtService), UsernamePasswordAuthenticationFilter.class)        //Quando houver verificação de rotas: DESCOMENTE
             .build();
     }
 
