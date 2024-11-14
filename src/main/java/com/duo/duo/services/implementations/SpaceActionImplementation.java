@@ -34,19 +34,13 @@ public class SpaceActionImplementation implements SpaceActionsService{
 
     //* recebe uma DTO SpaceCreation (String name) e retorna um Response do tipo <Space> com o Space criado e uma mensagem*/
 
-    public ResponseEntity<Response<Space>> postSpace(SpaceCreation space) {
-        var found = spaceRepo.findByName(space.name());
-
-        if (found != null) {
-            /* caso já exista um space com esse nome, retorna um objeto vazio e uma mensagem de erro */
-            return new ResponseEntity<>( new Response<Space>(null, "There is already a space with that name. Choose another!"), HttpStatus.UNPROCESSABLE_ENTITY); // Não se pode criar um espaço com nome já existente, status 422
-        }
-
+    public Space postSpace(SpaceCreation space) {
+        
         Space newSpace = new Space();
         newSpace.setName(space.name());
         spaceRepo.save(newSpace);
 
-        return new ResponseEntity<>( new Response<Space>(newSpace, "Space created successfully!"), HttpStatus.CREATED); // Space criado com sucesso, status 201
+        return newSpace;
 
     }
 
@@ -111,6 +105,13 @@ public class SpaceActionImplementation implements SpaceActionsService{
     public ResponseEntity<Response<Space>> deleteSpace(Space space) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'deleteSpace'");
+    }
+
+    @Override
+    public Boolean checkSpaceNameForPost(String name) {
+        Space found = spaceRepo.findByName(name);
+
+        return found != null; // se encontrsr, retorna falso por não pode ser usaod;
     }
 
     
