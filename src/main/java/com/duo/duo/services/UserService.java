@@ -1,11 +1,13 @@
 package com.duo.duo.services;
 
-import org.springframework.http.ResponseEntity;
-
 import com.duo.duo.dto.UserDto.LoginDto;
 import com.duo.duo.dto.UserDto.NewUserDto;
+import com.duo.duo.dto.UserDto.ResponseLoginDto;
+import com.duo.duo.dto.UserDto.ResponseNewUserDto;
+import com.duo.duo.model.User;
 
-public interface UserService<T> {
-    public ResponseEntity<T> CreateUser(NewUserDto newUserData);              //Criar usuário     
-    public ResponseEntity<T> Login(LoginDto loginData);                                        //Deletar definitivamente um usuário do banco
+public interface UserService {
+    public User CreateUser(NewUserDto newUserData);
+    public ResponseLoginDto Login(LoginDto loginData);
+    public ResponseNewUserDto checkFields(NewUserDto newUserData);             
 }

@@ -1,15 +1,15 @@
 package com.duo.duo.services.implementations;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
-import com.duo.duo.dto.Response;
 import com.duo.duo.dto.Token;
 import com.duo.duo.dto.UserDto.LoginDto;
 import com.duo.duo.dto.UserDto.NewUserDto;
+import com.duo.duo.dto.UserDto.ResponseLoginDto;
+import com.duo.duo.dto.UserDto.ResponseNewUserDto;
 import com.duo.duo.model.User;
 import com.duo.duo.repositories.UserRepository;
 import com.duo.duo.services.EncoderService;
@@ -28,25 +28,7 @@ public class UserImplementation implements UserService {
     JwtService<Token> jwtService;
 
     @Override
-    public ResponseEntity<Response<User>> CreateUser(NewUserDto newUserData) {
-
-        List<User> users = userRepo.findByName(newUserData.name());
-
-        if (!users.isEmpty()) {
-            return new ResponseEntity<>(new Response<>(null, "Já existe um usuário cadastrado com esse nome!"), HttpStatus.UNPROCESSABLE_ENTITY);
-        }
-
-        users = userRepo.findByMail(newUserData.mail());
-
-        if (!users.isEmpty()) {
-            return new ResponseEntity<>(new Response<>(null, "Já existe um usuário cadastrado com esse E-mail"), HttpStatus.UNPROCESSABLE_ENTITY);
-        }
-
-        users = userRepo.findByEdv(newUserData.edv());
-
-        if (!users.isEmpty()) {
-            return new ResponseEntity<>(new Response<>(null, "Já existe um usuário cadastrado com esse EDV"), HttpStatus.UNPROCESSABLE_ENTITY);
-        }
+    public User CreateUser(NewUserDto newUserData) {
 
         User newUser = new User();
 
@@ -57,32 +39,67 @@ public class UserImplementation implements UserService {
 
         userRepo.save(newUser);
 
-        return new ResponseEntity<>(new Response<>(newUser, "Usuário criado com sucesso!"), HttpStatus.OK);
+        return newUser;
     }
 
     @Override
-    public ResponseEntity<Response<Token>> Login(LoginDto loginData) {
+    public ResponseLoginDto Login(LoginDto loginData) {
 
         List<User> users = userRepo.loginMailOrNameOrEDV(loginData.login());
 
-        if (users.isEmpty()) {
-            return new ResponseEntity<>(new Response<>(null, "Usuário não foi encontrado!"), HttpStatus.BAD_REQUEST);
-        }
+        ArrayList<String> messages = new ArrayList<>();
 
+        if (users.isEmpty()) {
+            messages.add("Usuário não encontrado!");
+            return new ResponseLoginDto(null, messages);
+        }
+        
         User user = users.get(0);
 
-        if (!encoder.validate(loginData.password(), user.getPassword())) {
-            return new ResponseEntity<>(new Response<>(null, "Senha incorreta!"), HttpStatus.BAD_REQUEST);
+        if (encoder.validate(loginData.password(), user.getPassword())) {
+            messages.add("Senha inválida!");
+            return new ResponseLoginDto(null, messages);
         }
 
         Token token = new Token();
         token.setId(user.getId());
 
-        String jwt = jwtService.get(token);
+        var jwt = jwtService.get(token);
 
-        // ! Arrumar depois, há algum erro na hora de enviar a string o jwt
-        // return new ResponseEntity<>(new Response<>(jwt, "Senha incorreta!"), HttpStatus.OK);
+        messages.add("Usuário logado com sucesso!");
+        return new ResponseLoginDto(jwt, messages);
+    }
+
+    @Override
+    public ResponseNewUserDto checkFields(NewUserDto newUserData) {
+
+        List<User> users = userRepo.findByName(newUserData.name());
+
+        ArrayList<String> messages =  new ArrayList<>();
+
         
-        return null;
+        if (newUserData.password() == null || newUserData.name() == null || newUserData.mail() == null) {
+            messages.add("Preencha todos os campos!");
+        }
+        
+        if (!users.isEmpty()) {
+            messages.add("Já existe um usuário cadastrado com este nome!");
+        }
+        
+        users = userRepo.findByMail(newUserData.mail());
+        
+        if (!users.isEmpty()) {
+            messages.add("Já existe um usuário cadastrado com este e-mail!");
+        }
+        
+        users = userRepo.findByEdv(newUserData.edv());
+        
+        if (!users.isEmpty()) {
+            messages.add("Já existe um usuário cadastrado com este EDV!");
+        }
+        
+        ResponseNewUserDto response = new ResponseNewUserDto(null, messages);
+        
+        return response;
     }
 }
