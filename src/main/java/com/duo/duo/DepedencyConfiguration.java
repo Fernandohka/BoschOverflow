@@ -15,10 +15,10 @@ import com.duo.duo.services.implementations.UserValidateImplementation;
 public class DepedencyConfiguration {
     
     // @Bean
-    // @Scope("singleton")                  //CRIA UM UNICO OBJETO PARA TODO O PROGRAMA 
-    // @Scope("prototype")                  //TODA VEZ QUE PRECISAR DE UM OBJETO, ELE CRIA UM NOVO
-    // @Scope("request")                    //PARA UMA ÚNICA REQUISIÇÃO ELE USA O MESMO OBJETO
-    // @Scope("session")                    //O OBJETO VAI SAER USADO PARA TUDO DO USUARIO SELECIONAODI
+    // @Scope("singleton")                  // CRIA UM UNICO OBJETO PARA TODO O PROGRAMA 
+    // @Scope("prototype")                  // TODA VEZ QUE PRECISAR DE UM OBJETO, ELE CRIA UM NOVO
+    // @Scope("request")                    // PARA UMA ÚNICA REQUISIÇÃO ELE USA O MESMO OBJETO
+    // @Scope("session")                    // O OBJETO VAI SAER USADO PARA TUDO DO USUARIO SELECIONAODI
     // public service service(){
     //     return new implementation();
     // }
@@ -28,7 +28,7 @@ public class DepedencyConfiguration {
     public UserValidateService userValidateService(){
         return new UserValidateImplementation();
     }
-    
+
     @Bean
     public UserService userService(){
         return new UserImplementation();

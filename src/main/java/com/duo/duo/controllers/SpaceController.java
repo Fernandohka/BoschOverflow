@@ -12,14 +12,14 @@ import com.duo.duo.dto.space.AddUserToSpace;
 import com.duo.duo.dto.space.SpaceCreation;
 import com.duo.duo.model.Space;
 import com.duo.duo.model.UserSpace;
-import com.duo.duo.services.implementations.SpaceActionImplementation;
+import com.duo.duo.services.SpaceActionsService;
 
 @RestController
 @RequestMapping("/space")
 public class SpaceController {
 
     @Autowired
-    SpaceActionImplementation spaceService;
+    SpaceActionsService spaceService;
 
 
     @PostMapping("/post")

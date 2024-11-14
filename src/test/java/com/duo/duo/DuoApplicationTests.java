@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import com.duo.duo.model.User;
 
 import com.duo.duo.repositories.UserRepository;
 import com.duo.duo.services.UserValidateService;
@@ -18,7 +17,6 @@ public class DuoApplicationTests {
 	@Autowired
 	UserRepository userRepository;
 
-    
 	@Test
 	void validarSenhaPequena(){
 		assertEquals(userValidateService.validatePassword("oi"), false);
