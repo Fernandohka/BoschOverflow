@@ -28,6 +28,7 @@ public class JwtImplementation implements JwtService<Token> {
     }
 
     @Override
+    @SuppressWarnings({"UseSpecificCatch", "CallToPrintStackTrace"})
     public Token validate(String jwt) {
         try
         {

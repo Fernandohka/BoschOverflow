@@ -2,9 +2,6 @@ package com.duo.duo.services;
 
 import java.util.ArrayList;
 
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
-
 import com.duo.duo.dto.space.AddUserToSpace;
 import com.duo.duo.dto.space.ChangePermission;
 import com.duo.duo.dto.space.SpaceCreation;

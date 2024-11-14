@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
+import com.duo.duo.dto.Token;
 import com.duo.duo.services.EncoderService;
 import com.duo.duo.services.JwtService;
 import com.duo.duo.services.SpaceActionsService;
@@ -18,11 +19,12 @@ import com.duo.duo.services.implementations.UserValidateImplementation;
 @Configuration
 public class DepedencyConfiguration {
     
-    // @Bean
-    // @Scope("singleton")                  // CRIA UM UNICO OBJETO PARA TODO O PROGRAMA 
-    // @Scope("prototype")                  // TODA VEZ QUE PRECISAR DE UM OBJETO, ELE CRIA UM NOVO
-    // @Scope("request")                    // PARA UMA ÚNICA REQUISIÇÃO ELE USA O MESMO OBJETO
-    // @Scope("session")                    // O OBJETO VAI SAER USADO PARA TUDO DO USUARIO SELECIONAODI
+    // * @Bean
+    // * @Scope("singleton")                  // CRIA UM UNICO OBJETO PARA O PROGRAMA INTEIRO
+    // * @Scope("prototype")                  // TODA VEZ QUE PRECISAR DE UM OBJETO, ELE CRIA UM NOVO
+    // * @Scope("request")                    // PARA UMA ÚNICA REQUISIÇÃO ELE USA O MESMO OBJETO
+    // * @Scope("session")                    // O OBJETO VAI SAER USADO PARA TUDO DO USUARIO SELECIONADO
+
     // public service service(){
     //     return new implementation();
     // }
@@ -49,7 +51,7 @@ public class DepedencyConfiguration {
     }
 
     @Bean
-    public JwtService jwtService() {
+    public JwtService<Token> jwtService() {
         return new JwtImplementation();
     }
     

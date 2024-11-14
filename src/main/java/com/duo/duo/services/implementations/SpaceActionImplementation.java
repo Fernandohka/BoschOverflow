@@ -3,7 +3,6 @@ package com.duo.duo.services.implementations;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
 import org.springframework.data.domain.PageRequest;
 
 import com.duo.duo.dto.space.AddUserToSpace;
@@ -83,8 +82,7 @@ public class SpaceActionImplementation implements SpaceActionsService{
 
         //* ROTA NÃO ESPECIFICADA NO QUADRO - PRIORIDADE MENOR */
 
-        // TODO Auto-generated method stub //
-        throw new UnsupportedOperationException("Unimplemented method 'patchPermission'");
+        throw null;
     }
 
     @Override

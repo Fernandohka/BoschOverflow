@@ -114,23 +114,15 @@ public class UserImplementation implements UserService {
         if (newUserData.password() == null || newUserData.name() == null || newUserData.mail() == null) {
             return false;
         }
-
-        if (newUserData.password().equals("") || newUserData.name().equals("") || newUserData.mail().equals("")) {
-            return false;
-        }
         
-        return true;
+        return !newUserData.password().equals("") || newUserData.name().equals("") || newUserData.mail().equals("");
     }
 
     public Boolean verifyFieldsLogin(LoginDto loginData) {
         if (loginData.password() == null || loginData.login() == null) {
             return false;
         }
-
-        if (loginData.password().equals("") || loginData.login().equals("")) {
-            return false;
-        }
         
-        return true;
+        return !loginData.password().equals("") || loginData.login().equals("");
     }
 }
