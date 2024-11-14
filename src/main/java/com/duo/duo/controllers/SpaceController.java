@@ -29,7 +29,7 @@ public class SpaceController {
     @PostMapping("/post")
     public ResponseEntity<Space> postSpace(@RequestBody SpaceCreation space) {
 
-        if (!spaceService.checkSpaceNameForPost(space.name()))
+        if (spaceService.checkSpaceNameForPost(space.name()))
             return new ResponseEntity<>(null, HttpStatus.CONFLICT); // se tiver um com o memso nome não cria
 
         var created = spaceService.postSpace(space);
@@ -37,8 +37,8 @@ public class SpaceController {
     }
 
     
-    @PostMapping("/permission/post") //? o correto era criar outro controlador com os serviços somente de Permissão/ UserService 
-                                     //? mas estamos atrasados e não tem interface de UserService pronta e estamos com pouco tempo beijinhos de luz da kau e amilton
+    @PostMapping("/permission/post") // ? o correto era criar outro controlador com os serviços somente de Permissão/ UserService 
+                                     // ? mas estamos atrasados e não tem interface de UserService pronta e estamos com pouco tempo beijinhos de luz da kau e amilton
                                      
     public ResponseEntity<UserSpace> addUser(@RequestBody AddUserToSpace permission) {
 
