@@ -28,7 +28,7 @@ public class DepedencyConfiguration {
     public UserValidateService userValidateService(){
         return new UserValidateImplementation();
     }
-
+    
     @Bean
     public UserService userService(){
         return new UserImplementation();
@@ -38,4 +38,5 @@ public class DepedencyConfiguration {
     public SpaceActionsService spaceActionsService() {
         return new SpaceActionImplementation();
     }
+    
 }
