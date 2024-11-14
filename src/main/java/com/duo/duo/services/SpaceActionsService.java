@@ -1,8 +1,5 @@
 package com.duo.duo.services;
 
-import org.springframework.http.ResponseEntity;
-
-import com.duo.duo.dto.Response;
 import com.duo.duo.dto.space.AddUserToSpace;
 import com.duo.duo.dto.space.ChangePermission;
 import com.duo.duo.dto.space.SpaceCreation;
@@ -17,6 +14,6 @@ public interface SpaceActionsService {
     public Boolean checkForUser(Long id);          //checa se existe um user
     public UserSpace addUser(AddUserToSpace userSpace); // cria uma permissão
               
-    public ResponseEntity<Response<UserSpace>> patchPermission(ChangePermission userSpace);       //Alterar o nível de permissão de um usuário do espaço
-    public ResponseEntity<Response<Space>> deleteSpace(Space space);                   //Apagar espaço
+    public UserSpace patchPermission(ChangePermission userSpace);       //Alterar o nível de permissão de um usuário do espaço
+    public Space deleteSpace(Space space);                   //Apagar espaço
 }

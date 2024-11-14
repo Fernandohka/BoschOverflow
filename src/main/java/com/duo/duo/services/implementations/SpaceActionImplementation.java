@@ -1,10 +1,7 @@
 package com.duo.duo.services.implementations;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
-import com.duo.duo.dto.Response;
 import com.duo.duo.dto.space.AddUserToSpace;
 import com.duo.duo.dto.space.ChangePermission;
 import com.duo.duo.dto.space.SpaceCreation;
@@ -78,28 +75,20 @@ public class SpaceActionImplementation implements SpaceActionsService{
 
 
     @Override
-    public ResponseEntity<Response<UserSpace>> patchPermission(ChangePermission userSpace) {
+    public UserSpace patchPermission(ChangePermission userSpace) {
 
-        UserSpace permission = permissionRepo.findByUserId(userSpace.userId());
-        
-        User foundUser = userRepo.findById(userSpace.userId()).get();
+        //* ROTA NÃO ESPECIFICADA NO QUADRO - PRIORIDADE MENOR */
 
-        if (permission == null) {
-            return new ResponseEntity<>( new Response<UserSpace>(null, "User not found!"), HttpStatus.NOT_FOUND); // Usuário não encontrado, erro 404
-        }
-
-        permission.setPermissionLevel(2); //? USUÁRIO MEMBRO - NÍVEL DE PERMISSÃO (2) */
-        permission.setUser(foundUser);
-
-        permissionRepo.save(permission);
-
-        return new ResponseEntity<>(new Response<>(permission, "User added to the space successfully!"), HttpStatus.OK); // Usuário adicionado ao Space com sucesso, status 200
+        // TODO Auto-generated method stub //
+        throw new UnsupportedOperationException("Unimplemented method 'patchPermission'");
     }
 
     @Override
-    public ResponseEntity<Response<Space>> deleteSpace(Space space) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteSpace'");
+    public Space deleteSpace(Space space) {
+
+        spaceRepo.delete(space);
+
+        return space;
     }
 
 
