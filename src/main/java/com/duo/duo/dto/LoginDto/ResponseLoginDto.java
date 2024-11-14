@@ -1,4 +1,4 @@
-package com.duo.duo.dto.UserDto;
+package com.duo.duo.dto.LoginDto;
 
 import java.util.ArrayList;
 

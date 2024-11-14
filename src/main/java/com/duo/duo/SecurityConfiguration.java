@@ -24,8 +24,9 @@ public class SecurityConfiguration {
         return http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(authorize -> authorize
-                .requestMatchers("/user/login").permitAll() // permite apenas a rota de login
-                .anyRequest().authenticated()                           // todas as outras requerem autenticação                                                                 
+                .requestMatchers("/user").permitAll()
+                .requestMatchers("/auth").permitAll()
+                .anyRequest().authenticated()                                                                         
                                                                                                          
             )
             .addFilterBefore(new JWTAuthenticationFilter(jwtService), UsernamePasswordAuthenticationFilter.class)

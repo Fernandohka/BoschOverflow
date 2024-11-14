@@ -5,16 +5,15 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.duo.duo.model.User;
-
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.duo.duo.dto.UserDto.LoginDto;
+import com.duo.duo.dto.LoginDto.LoginDto;
+import com.duo.duo.dto.LoginDto.ResponseLoginDto;
 import com.duo.duo.dto.UserDto.NewUserDto;
 import com.duo.duo.dto.UserDto.ResponseNewUserDto;
+import com.duo.duo.model.User;
 import com.duo.duo.services.UserService;
 
 @RestController
@@ -23,10 +22,8 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @PostMapping("/user/register")
+    @PostMapping("/user")
     public ResponseEntity<ResponseNewUserDto> createUser(@RequestBody NewUserDto newUserData) {
-        
-        userService.CreateUser(newUserData);
 
         ResponseNewUserDto response = userService.checkFields(newUserData);
         ArrayList<String> errors = response.messages();
@@ -38,16 +35,23 @@ public class UserController {
         User user = userService.CreateUser(newUserData);
 
         response = new ResponseNewUserDto(user, errors);
-
+        
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PostMapping("/user/login")
-    public String postMethodName(@RequestBody LoginDto loginData) {
+    @PostMapping("/auth")
+    public ResponseEntity<ResponseLoginDto> login(@RequestBody LoginDto loginData) {
         
-        userService.Login(loginData);
+        ResponseLoginDto response = userService.Login(loginData);
 
-        return null;
+        if (response.token() == null) {
+            System.out.println(loginData);
+            return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED); // * Erro Http 401
+        }
+
+        System.out.println(loginData);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
     
 }

@@ -6,9 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.duo.duo.dto.Token;
-import com.duo.duo.dto.UserDto.LoginDto;
+import com.duo.duo.dto.LoginDto.LoginDto;
+import com.duo.duo.dto.LoginDto.ResponseLoginDto;
 import com.duo.duo.dto.UserDto.NewUserDto;
-import com.duo.duo.dto.UserDto.ResponseLoginDto;
 import com.duo.duo.dto.UserDto.ResponseNewUserDto;
 import com.duo.duo.model.User;
 import com.duo.duo.repositories.UserRepository;
@@ -49,6 +49,11 @@ public class UserImplementation implements UserService {
 
         ArrayList<String> messages = new ArrayList<>();
 
+        if (!verifyFieldsLogin(loginData)) {
+            messages.add("Preencha todos os campos;");
+            return new ResponseLoginDto(null, messages);
+        }
+
         if (users.isEmpty()) {
             messages.add("Usuário não encontrado!");
             return new ResponseLoginDto(null, messages);
@@ -56,7 +61,7 @@ public class UserImplementation implements UserService {
         
         User user = users.get(0);
 
-        if (encoder.validate(loginData.password(), user.getPassword())) {
+        if (!encoder.validate(loginData.password(), user.getPassword())) {
             messages.add("Senha inválida!");
             return new ResponseLoginDto(null, messages);
         }
@@ -73,12 +78,14 @@ public class UserImplementation implements UserService {
     @Override
     public ResponseNewUserDto checkFields(NewUserDto newUserData) {
 
+        System.out.println(newUserData);
+
         List<User> users = userRepo.findByName(newUserData.name());
 
         ArrayList<String> messages =  new ArrayList<>();
 
         
-        if (newUserData.password() == null || newUserData.name() == null || newUserData.mail() == null) {
+        if (!verifyFieldsRegister(newUserData)) {
             messages.add("Preencha todos os campos!");
         }
         
@@ -101,5 +108,29 @@ public class UserImplementation implements UserService {
         ResponseNewUserDto response = new ResponseNewUserDto(null, messages);
         
         return response;
+    }
+
+    public Boolean verifyFieldsRegister(NewUserDto newUserData) {
+        if (newUserData.password() == null || newUserData.name() == null || newUserData.mail() == null) {
+            return false;
+        }
+
+        if (newUserData.password().equals("") || newUserData.name().equals("") || newUserData.mail().equals("")) {
+            return false;
+        }
+        
+        return true;
+    }
+
+    public Boolean verifyFieldsLogin(LoginDto loginData) {
+        if (loginData.password() == null || loginData.login() == null) {
+            return false;
+        }
+
+        if (loginData.password().equals("") || loginData.login().equals("")) {
+            return false;
+        }
+        
+        return true;
     }
 }

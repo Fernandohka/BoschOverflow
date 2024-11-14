@@ -4,9 +4,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
+import com.duo.duo.services.EncoderService;
+import com.duo.duo.services.JwtService;
 import com.duo.duo.services.SpaceActionsService;
 import com.duo.duo.services.UserService;
 import com.duo.duo.services.UserValidateService;
+import com.duo.duo.services.implementations.EncoderImplementation;
+import com.duo.duo.services.implementations.JwtImplementation;
 import com.duo.duo.services.implementations.SpaceActionImplementation;
 import com.duo.duo.services.implementations.UserImplementation;
 import com.duo.duo.services.implementations.UserValidateImplementation;
@@ -37,6 +41,16 @@ public class DepedencyConfiguration {
     @Bean
     public SpaceActionsService spaceActionsService() {
         return new SpaceActionImplementation();
+    }
+
+    @Bean
+    public EncoderService encoderService() {
+        return new EncoderImplementation();
+    }
+
+    @Bean
+    public JwtService jwtService() {
+        return new JwtImplementation();
     }
     
 }

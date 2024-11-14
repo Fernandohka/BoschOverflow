@@ -1,4 +1,4 @@
-package com.duo.duo.dto.UserDto;
+package com.duo.duo.dto.LoginDto;
 
 public record LoginDto(
     String login,

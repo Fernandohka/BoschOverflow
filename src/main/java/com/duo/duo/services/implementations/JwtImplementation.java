@@ -15,7 +15,7 @@ import com.duo.duo.dto.Token;
 import com.duo.duo.services.JwtService;
 
 public class JwtImplementation implements JwtService<Token> {
-    private final String SECRET_KEY = "ouqebfdouiebfouqewfnuoqewnhfouewnfouewnh";
+    private final String SECRET_KEY = "ouqebfdouiebfouqewfnuoqewnhfouewnadasijdadasdafouewnh";
     private final long EXPIRATION_TIME = 1000 * 60 * 60; // 1 hora
 
     @Override
@@ -34,7 +34,7 @@ public class JwtImplementation implements JwtService<Token> {
             var map = validateJwt(jwt);
             
             Token token = new Token();
-            token.setId(Long.parseLong(map.get("id").toString()));
+            token.setId(Long.valueOf(map.get("id").toString()));
 
             return token;
         }
