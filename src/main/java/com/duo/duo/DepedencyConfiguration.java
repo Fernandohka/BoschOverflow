@@ -24,4 +24,5 @@ public class DepedencyConfiguration {
     public UserValidateService userValidateService(){
         return new UserValidateImplementation();
     }
+    
 }
