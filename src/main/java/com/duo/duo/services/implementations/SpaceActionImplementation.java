@@ -1,6 +1,10 @@
 package com.duo.duo.services.implementations;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
+import org.springframework.data.domain.PageRequest;
 
 import com.duo.duo.dto.space.AddUserToSpace;
 import com.duo.duo.dto.space.ChangePermission;
@@ -89,6 +93,13 @@ public class SpaceActionImplementation implements SpaceActionsService{
         spaceRepo.delete(space);
 
         return space;
+    }
+
+    @Override
+    public ArrayList<Space> getSpaces(String name, Integer page, Integer limit) {
+        var results = spaceRepo.findByNameContains(name, PageRequest.of(page, limit)); // ai que medo
+        
+        return new ArrayList<>(results);
     }
 
 
