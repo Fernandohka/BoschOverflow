@@ -4,7 +4,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
+import com.duo.duo.services.SpaceActionsService;
+import com.duo.duo.services.UserService;
 import com.duo.duo.services.UserValidateService;
+import com.duo.duo.services.implementations.SpaceActionImplementation;
+import com.duo.duo.services.implementations.UserImplementation;
 import com.duo.duo.services.implementations.UserValidateImplementation;
 
 @Configuration
@@ -23,5 +27,15 @@ public class DepedencyConfiguration {
     @Scope("singleton")
     public UserValidateService userValidateService(){
         return new UserValidateImplementation();
+    }
+
+    @Bean
+    public UserService userService(){
+        return new UserImplementation();
+    }
+
+    @Bean
+    public SpaceActionsService spaceActionsService() {
+        return new SpaceActionImplementation();
     }
 }
