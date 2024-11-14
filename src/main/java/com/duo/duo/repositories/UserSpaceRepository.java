@@ -8,5 +8,6 @@ import com.duo.duo.model.UserSpace;
 
 @Repository
 public interface UserSpaceRepository extends JpaRepository<UserSpace, Long>{
-    public User findOneByEmailOrEdv(String email, String edv);                  //Para utilizar no login independente do método escolhido pelo usuário
+    public User findOneByEmailOrEdv(String email, String edv);
+    public UserSpace findByUserId(Long userId);                  //Para utilizar no login independente do método escolhido pelo usuário
 }

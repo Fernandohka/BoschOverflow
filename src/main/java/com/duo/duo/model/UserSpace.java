@@ -13,6 +13,14 @@ public class UserSpace {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long Id;
+
+    /*
+     ? NÍVEIS DE PERMISSÃO - REPRESENTADOS POR UM INTEIRO
+     * 1 - USUÁRIO SEM PERMISSÃO ALGUMA
+     * 2 - USUÁRIO MEMBRO DE UM SPACE
+     * 3 - ADMINISTRADOR
+     */
+
     private Integer permissionLevel;
 
     @ManyToOne
