@@ -11,8 +11,12 @@ import com.duo.duo.model.UserSpace;
 
 public interface SpaceActionsService {
     public Boolean checkSpaceNameForPost(String name);             //Criar um novo espaço
-    public Space postSpace(SpaceCreation space);             //Criar um novo espaço
-    public ResponseEntity<Response<UserSpace>> addUser(AddUserToSpace userSpace);           //Adicionar usuário ao espaço
+    public Space postSpace(SpaceCreation space);   
+
+    public Boolean checkForSpace(Long id);          //checa se existe um space
+    public Boolean checkForUser(Long id);          //checa se existe um user
+    public UserSpace addUser(AddUserToSpace userSpace); // cria uma permissão
+              
     public ResponseEntity<Response<UserSpace>> patchPermission(ChangePermission userSpace);       //Alterar o nível de permissão de um usuário do espaço
     public ResponseEntity<Response<Space>> deleteSpace(Space space);                   //Apagar espaço
 }

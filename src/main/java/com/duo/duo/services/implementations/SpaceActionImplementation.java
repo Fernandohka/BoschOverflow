@@ -31,9 +31,13 @@ public class SpaceActionImplementation implements SpaceActionsService{
     UserRepository userRepo;
 
     @Override
+    public Boolean checkSpaceNameForPost(String name) {
+        Space found = spaceRepo.findByName(name);
 
-    //* recebe uma DTO SpaceCreation (String name) e retorna um Response do tipo <Space> com o Space criado e uma mensagem*/
+        return found != null; // se encontrsr, retorna falso por não pode ser usaod;
+    }
 
+    @Override
     public Space postSpace(SpaceCreation space) {
         
         Space newSpace = new Space();
@@ -41,44 +45,35 @@ public class SpaceActionImplementation implements SpaceActionsService{
         spaceRepo.save(newSpace);
 
         return newSpace;
-
     }
 
     @Override
+    public Boolean checkForSpace(Long id) {
+        Space found = spaceRepo.findById(id).get();
+        return found != null;
+    }
 
-    /*
-        * recebe uma AddUserToSpace DTO que contém:
-            * 1. id do usuário a ser adicionado
-            * 2. id do space a receber esse novo usuário
-
-        * e retorna um Response do tipo <UserSpace> com a permissão criada e uma mensagem
-        
-        ? VERIFICAR A MODEL DE "UserSpace" PARA CONFERIR OS NÍVEIS DE PERMISSÃO - USUÁRIO MEMBRO : NÍVEL DE PERMISSÃO (2)
-     */
+    @Override
+    public Boolean checkForUser(Long id) {
+        User found = userRepo.findById(id).get();
+        return found != null;
+    }
     
-    public ResponseEntity<Response<UserSpace>> addUser(AddUserToSpace userSpace) {
-
-        Space found = spaceRepo.findById(userSpace.spaceId()).get();
-
-        if (found == null) {
-            return new ResponseEntity<>( new Response<UserSpace>(null, "Space not found!"), HttpStatus.NOT_FOUND); // Space não encontrado, erro 404
-        }
-
-        User foundUser = userRepo.findById(userSpace.userId()).get();
-
-        if (foundUser == null) {
-            return new ResponseEntity<>( new Response<UserSpace>(null, "User not found!"), HttpStatus.NOT_FOUND); // Usuário não encontrado, erro 404
-        }
-
+    @Override
+    public UserSpace addUser(AddUserToSpace userSpace) {
         UserSpace permission = new UserSpace();
 
         permission.setPermissionLevel(2); //? USUÁRIO MEMBRO - NÍVEL DE PERMISSÃO (2) */
+        
+        Space found = spaceRepo.findById(userSpace.spaceId()).get();
+        User foundUser = userRepo.findById(userSpace.spaceId()).get();
+        
         permission.setSpace(found);
         permission.setUser(foundUser);
 
         permissionRepo.save(permission);
 
-        return new ResponseEntity<>(new Response<>(permission, "User added to the space successfully!"), HttpStatus.OK); // Usuário adicionado ao Space com sucesso, status 200
+        return permission; // Usuário adicionado ao Space com sucesso
     }
 
 
@@ -107,12 +102,6 @@ public class SpaceActionImplementation implements SpaceActionsService{
         throw new UnsupportedOperationException("Unimplemented method 'deleteSpace'");
     }
 
-    @Override
-    public Boolean checkSpaceNameForPost(String name) {
-        Space found = spaceRepo.findByName(name);
 
-        return found != null; // se encontrsr, retorna falso por não pode ser usaod;
-    }
 
-    
 }

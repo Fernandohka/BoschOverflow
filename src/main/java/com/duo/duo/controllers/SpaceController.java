@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.duo.duo.dto.space.AddUserToSpace;
 import com.duo.duo.dto.space.SpaceCreation;
 import com.duo.duo.model.Space;
+import com.duo.duo.model.UserSpace;
 import com.duo.duo.services.implementations.SpaceActionImplementation;
 
 @RestController
@@ -27,6 +29,19 @@ public class SpaceController {
             return new ResponseEntity<>(null, HttpStatus.CONFLICT); // se tiver um com o memso nome não cria
 
         var created = spaceService.postSpace(space);
+        return new ResponseEntity<>(created, HttpStatus.CREATED);
+    }
+
+    
+    @PostMapping("/permission/post") //* o correto era criar outro controlador com os erviços somente de Permissão/ UserService 
+                                     //* mas estamos atrasados e não tem interface de UserService pronta e estamos com pouco tempo beijinhos de luz da kau e amilton
+                                     
+    public ResponseEntity<UserSpace> addUser(@RequestBody AddUserToSpace permission) {
+
+        if (!spaceService.checkForUser(permission.userId()) || !spaceService.checkForUser(permission.userId()))
+            return new ResponseEntity<>(null, HttpStatus.CONFLICT); // se tiver um com o memso nome não cria
+
+        var created = spaceService.addUser(permission);
         return new ResponseEntity<>(created, HttpStatus.CREATED);
     }
     
