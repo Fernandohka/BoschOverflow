@@ -13,4 +13,5 @@ public interface SpaceRepository extends JpaRepository<Space, Long>{
     public Space findByName(String name);
 
     public List<Space> findByNameContains(String name, PageRequest req);
+
 }

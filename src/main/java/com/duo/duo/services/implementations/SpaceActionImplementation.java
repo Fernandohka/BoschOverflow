@@ -1,12 +1,12 @@
 package com.duo.duo.services.implementations;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 
 import com.duo.duo.dto.space.AddUserToSpace;
-import com.duo.duo.dto.space.ChangePermission;
 import com.duo.duo.dto.space.SpaceCreation;
 import com.duo.duo.model.Space;
 import com.duo.duo.model.User;
@@ -38,11 +38,22 @@ public class SpaceActionImplementation implements SpaceActionsService{
     }
 
     @Override
-    public Space postSpace(SpaceCreation space) {
+    public Space postSpace(SpaceCreation space, Long userId) {
         
         Space newSpace = new Space();
         newSpace.setName(space.name());
+
+        var found = userRepo.findById(userId).get();
+        
+        UserSpace permission = new UserSpace();
+        permission.setSpace(newSpace);
+        permission.setUser(found);
+        permission.setPermissionLevel(3);   // seta o usuário criador como adm
+                                                            //? USUÁRIO ADM - NÍVEL DE PERMISSÃO (3) */
+
         spaceRepo.save(newSpace);
+        permissionRepo.save(permission);
+
 
         return newSpace;
     }
@@ -60,29 +71,44 @@ public class SpaceActionImplementation implements SpaceActionsService{
     }
     
     @Override
-    public UserSpace addUser(AddUserToSpace userSpace) {
-        UserSpace permission = new UserSpace();
+    public UserSpace manageSpaceUsers(AddUserToSpace userSpace) {
 
-        permission.setPermissionLevel(2); //? USUÁRIO MEMBRO - NÍVEL DE PERMISSÃO (2) */
+        Optional<UserSpace> found = permissionRepo.findPermission(userSpace.userId(), userSpace.spaceId() ); // tenta achar uma permissão para aquele uusário - caso ache, realiza um PATCH, se não, cria uma permissão nova
+
+
+        if (found.isEmpty()) {
+            UserSpace permission = new UserSpace();
+
+            if (userSpace.permission() < 1 || userSpace.permission() > 3) {
+                permission.setPermissionLevel(2); //se o front mandar errado deixa como user default
+    
+            } else {
+                permission.setPermissionLevel(userSpace.permission()); //? USUÁRIO MEMBRO - NÍVEL DE PERMISSÃO (2) */
+            }
+    
+    
+            
+            Space foundSpace = spaceRepo.findById(userSpace.spaceId()).get();
+            User foundUser = userRepo.findById(userSpace.userId()).get();
+            
+            permission.setSpace(foundSpace);
+            permission.setUser(foundUser);
+    
+            permissionRepo.save(permission);
+    
+            return permission; 
+
+        } else {
+
+            var foundPermission = found.get();
+            foundPermission.setPermissionLevel(userSpace.permission());
+            permissionRepo.save(foundPermission);
+
+            return foundPermission; 
+
+        }
+
         
-        Space found = spaceRepo.findById(userSpace.spaceId()).get();
-        User foundUser = userRepo.findById(userSpace.spaceId()).get();
-        
-        permission.setSpace(found);
-        permission.setUser(foundUser);
-
-        permissionRepo.save(permission);
-
-        return permission; // Usuário adicionado ao Space com sucesso
-    }
-
-
-    @Override
-    public UserSpace patchPermission(ChangePermission userSpace) {
-
-        //* ROTA NÃO ESPECIFICADA NO QUADRO - PRIORIDADE MENOR */
-
-        throw null;
     }
 
     @Override
@@ -98,6 +124,26 @@ public class SpaceActionImplementation implements SpaceActionsService{
         var results = spaceRepo.findByNameContains(name, PageRequest.of(page, limit)); // ai que medo
         
         return new ArrayList<>(results);
+    }
+
+    @Override
+    public Integer checkUserPermission(Long userId, Long spaceId) {
+        
+        System.out.println(spaceId);
+        System.out.println(userId);
+    
+        Optional<UserSpace> found = permissionRepo.findPermission(userId, spaceId);
+    
+        // Safe handling: Check if the Optional is present
+        if (found.isEmpty()) {
+            System.out.println("No permission found for the given userId and spaceId.");
+            return null; // Return null if not found
+        }
+
+        UserSpace userSpace = found.get();
+    
+        return userSpace.getPermissionLevel();
+        
     }
 
 
