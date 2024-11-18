@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 
 import com.duo.duo.dto.QuestionDto.DeleteQuestionDto;
 import com.duo.duo.dto.QuestionDto.GetQuestionDto;
@@ -83,6 +84,14 @@ public class QuestionActionImplementation implements QuestionActionService {
         }
 
         return true;
+    }
+
+    @Override
+    public ArrayList<Question> getAllQuestions(Long spaceId, Integer page, Integer limit) {
+        var results = questionRepo.findBySpaceId(spaceId, PageRequest.of(page, limit)); 
+
+        return new ArrayList<>(results);
+
     }
     
 }
