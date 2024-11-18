@@ -123,6 +123,11 @@ public class SpaceActionImplementation implements SpaceActionsService{
 
     @Override
     public ArrayList<Space> getSpaces(String name, Integer page, Integer limit) {
+
+        System.out.println(name);
+        System.out.println(page);
+        System.out.println(limit);
+
         var results = spaceRepo.findByNameContains(name, PageRequest.of(page, limit)); // ai que medo
         
         return new ArrayList<>(results);

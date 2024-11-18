@@ -69,11 +69,11 @@ public class SpaceController {
     }
 
     @GetMapping("/get")
-    public ResponseEntity<ArrayList<Space>> getSpaces(@RequestParam String query,
-                                                      @RequestParam int page,
-                                                      @RequestParam int limit) {
+    public ResponseEntity<ArrayList<Space>> getSpaces(@RequestParam String query, @RequestParam int page, @RequestParam int limit) {
 
-        return null;
+        var results = spaceService.getSpaces(query, page, limit);
+        return new ResponseEntity<>(results, HttpStatus.CREATED);
+
     }
     
 }
