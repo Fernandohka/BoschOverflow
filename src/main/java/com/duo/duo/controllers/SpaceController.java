@@ -70,9 +70,8 @@ public class SpaceController {
 
     @GetMapping("/get")
     public ResponseEntity<ArrayList<Space>> getSpaces(@RequestParam String query,
-                                                        @RequestParam int page,
-                                                        @RequestParam int limit) {
-        
+                                                      @RequestParam int page,
+                                                      @RequestParam int limit) {
 
         return null;
     }

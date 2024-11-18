@@ -17,7 +17,9 @@ import com.duo.duo.repositories.UserSpaceRepository;
 import com.duo.duo.services.SpaceActionsService;
 
 
-//* Response DTO - record que retorna um objeto genérico T e uma mensagem */
+/*
+    * Response DTO - record que retorna um objeto genérico T e uma mensagem 
+*/
  
 public class SpaceActionImplementation implements SpaceActionsService{
 

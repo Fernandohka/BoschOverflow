@@ -21,7 +21,15 @@
 
 
 #2 Amilton e Kauane - 
-        _
+        - Amilton: Oi, então, basicamente organizamos os Dtos para cada uma das rotas ou funções, assim fica mais
+    fácil e mais organizado para a próxima pessoa.
+        Fizemos o possível para o código ficar bom para a próxima dupla, mas caso você não entenda alguma coisa, 
+    pode perguntar pra gente que estamos a disposição para tirar as dúvidas.
+        Outra coisa, as dtos que retornam listas de erros são utilizadas assim para poder retornar vários erros
+    de uma vez para o usuário, e várias verificações são feitas por meio do tamanho da lista ou coisa do tipo,
+    talvez isso fique meio confuso no começo, mas depois vocês entendem melhor.
+        Utilizamos também HTTPSTATUS, caso você não saiba o que cada um deles é, acho válido pesquisar para
+    entender melhor, as vezes até ajuda a entender para que serve aquele código ou aquele tratamento de erro.
 
 
 
