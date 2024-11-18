@@ -1,33 +1,88 @@
 package com.duo.duo.services.implementations;
 
-import com.duo.duo.model.Answer;
+import java.util.ArrayList;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.duo.duo.dto.QuestionDto.DeleteQuestionDto;
+import com.duo.duo.dto.QuestionDto.GetQuestionDto;
+import com.duo.duo.dto.QuestionDto.PostQuestionDto;
+import com.duo.duo.dto.QuestionDto.PostQuestionResponseDto;
 import com.duo.duo.model.Question;
+import com.duo.duo.model.UserSpace;
+import com.duo.duo.repositories.QuestionRepository;
+import com.duo.duo.repositories.UserSpaceRepository;
 import com.duo.duo.services.QuestionActionService;
 
 public class QuestionActionImplementation implements QuestionActionService {
 
+    @Autowired
+    QuestionRepository questionRepo;
+
+    @Autowired
+    UserSpaceRepository userSpaceRepo;
+
     @Override
-    public void postQuestion(Question question) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'postQuestion'");
+    public PostQuestionResponseDto postQuestion(PostQuestionDto data) {
+
+        ArrayList<String> messages = new ArrayList<>();
+        
+        if (!checkFields(data)) {
+            messages.add("Preencha todos os campos!");
+            return new PostQuestionResponseDto(null, messages);
+        }
+
+        Optional<UserSpace> userSpace = userSpaceRepo.findById(data.idUserSpace());
+        
+        Question question = new Question(null, null);
+
+        question.setDescription(data.description());
+        question.setUserSpace(userSpace.get());
+
+        questionRepo.save(question);
+
+        return new PostQuestionResponseDto(question, messages);
     }
 
     @Override
-    public void postAnswer(Answer answer) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'postAnswer'");
+    public GetQuestionDto getQuestion(Long id) {
+        
+        Optional<Question> question = questionRepo.findById(id);
+        ArrayList<String> messages =  new ArrayList<>();
+
+        if (question.isEmpty()) {
+            messages.add("A pergunta não foi encontrada!");
+            return new GetQuestionDto(null, messages);
+        }
+
+        return new GetQuestionDto(question.get(), messages);
     }
 
     @Override
-    public void deleteQuestion(Long idQuestion) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteQuestion'");
+    public DeleteQuestionDto deleteQuestion(Long idQuestion, Long idUser) {
+
+        UserSpace userSpace = userSpaceRepo.findByUserId(idUser);
+        Optional<Question> question = questionRepo.findById(idQuestion);
+
+        if (userSpace.getPermissionLevel() < 3) {
+            return new DeleteQuestionDto(0, "Você não tem permissão para deletar essa pergunta!");
+        }
+
+        questionRepo.delete(question.get());
+
+        return new DeleteQuestionDto(1, "Pergunta deletada com sucesso!");
     }
 
-    @Override
-    public void deleteAnswer(Long idAnswer) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteAnswer'");
+    public Boolean checkFields(PostQuestionDto data) {
+
+        if (data.description() == null || data.idUserSpace() == null || 
+            data.description().equals("") || data.idUserSpace() == 0) {
+            
+            return false;
+        }
+
+        return true;
     }
     
 }
