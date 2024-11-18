@@ -24,9 +24,6 @@ public class QuestionActionImplementation implements QuestionActionService {
     @Autowired
     UserSpaceRepository userSpaceRepo;
 
-    @Autowired
-    SpaceActionImplementation spaceService;
-
     @Override
     public PostQuestionResponseDto postQuestion(PostQuestionDto data, Token token) {
 
@@ -38,10 +35,11 @@ public class QuestionActionImplementation implements QuestionActionService {
             return new PostQuestionResponseDto(null, messages);
         }
         
-        Optional<UserSpace> userSpace = userSpaceRepo.findById(data.idUserSpace());
-        Integer permission = spaceService.checkUserPermission(token.getId(), userSpace.get().getId());
+        Optional<UserSpace> getUserSpace = userSpaceRepo.findById(data.idUserSpace());
 
-        if (permission < 2) {
+        UserSpace userSpace = getUserSpace.get();
+
+        if (userSpace.getPermissionLevel() < 2) {
             messages.add("Você não tem permissão para fazer uma pergunta!");
             return new PostQuestionResponseDto(null, messages);
         }
@@ -49,7 +47,7 @@ public class QuestionActionImplementation implements QuestionActionService {
         Question question = new Question(null, null);
 
         question.setDescription(data.description());
-        question.setUserSpace(userSpace.get());
+        question.setUserSpace(userSpace);
 
         questionRepo.save(question);
 

@@ -11,6 +11,7 @@ import com.duo.duo.dto.AnswerDto.NewAnswerResponseDto;
 import com.duo.duo.model.Answer;
 import com.duo.duo.model.Question;
 import com.duo.duo.model.User;
+import com.duo.duo.model.UserSpace;
 import com.duo.duo.repositories.AnswerRepository;
 import com.duo.duo.repositories.QuestionRepository;
 import com.duo.duo.repositories.UserRepository;
@@ -19,9 +20,6 @@ import com.duo.duo.services.AnswerService;
 import com.duo.duo.services.SpaceActionsService;
 
 public class AnswerImplementation implements AnswerService {
-
-    @Autowired
-    SpaceActionsService spaceService;
 
     @Autowired
     QuestionRepository questionRepo;
@@ -48,9 +46,9 @@ public class AnswerImplementation implements AnswerService {
 
         Question question = getQuestion.get();
 
-        Integer permission = spaceService.checkUserPermission(idUser, question.getUserSpace().getId());
+        UserSpace userSpace = userSpaceRepo.findByUserId(idUser);
 
-        if (permission < 2)
+        if (userSpace.getPermissionLevel() < 2)
             return new NewAnswerResponseDto(1, "Você não tem permissão para fazer uma pergunta!");
         
         Answer newAnswer = new Answer();
