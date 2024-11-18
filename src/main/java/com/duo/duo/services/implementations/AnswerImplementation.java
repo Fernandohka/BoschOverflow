@@ -45,7 +45,7 @@ public class AnswerImplementation implements AnswerService {
 
         Question question = getQuestion.get();
 
-        UserSpace userSpace = userSpaceRepo.findByUserId(idUser);
+        UserSpace userSpace = question.getUserSpace();
 
         if (userSpace.getPermissionLevel() < 2)
             return new NewAnswerResponseDto(1, "Você não tem permissão para fazer uma pergunta!");
@@ -58,7 +58,7 @@ public class AnswerImplementation implements AnswerService {
 
         answerRepo.save(newAnswer);
 
-        return new NewAnswerResponseDto(2, "Pergunta postada com sucesso!");
+        return new NewAnswerResponseDto(2, "Resposta postada com sucesso!");
     }
 
     @Override
