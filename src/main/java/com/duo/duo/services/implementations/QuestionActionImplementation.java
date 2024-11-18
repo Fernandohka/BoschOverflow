@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.duo.duo.dto.Token;
 import com.duo.duo.dto.QuestionDto.DeleteQuestionDto;
 import com.duo.duo.dto.QuestionDto.GetQuestionDto;
 import com.duo.duo.dto.QuestionDto.PostQuestionDto;
@@ -23,17 +24,27 @@ public class QuestionActionImplementation implements QuestionActionService {
     @Autowired
     UserSpaceRepository userSpaceRepo;
 
+    @Autowired
+    SpaceActionImplementation spaceService;
+
     @Override
-    public PostQuestionResponseDto postQuestion(PostQuestionDto data) {
+    public PostQuestionResponseDto postQuestion(PostQuestionDto data, Token token) {
 
         ArrayList<String> messages = new ArrayList<>();
+
         
         if (!checkFields(data)) {
             messages.add("Preencha todos os campos!");
             return new PostQuestionResponseDto(null, messages);
         }
-
+        
         Optional<UserSpace> userSpace = userSpaceRepo.findById(data.idUserSpace());
+        Integer permission = spaceService.checkUserPermission(token.getId(), userSpace.get().getId());
+
+        if (permission < 2) {
+            messages.add("Você não tem permissão para fazer uma pergunta!");
+            return new PostQuestionResponseDto(null, messages);
+        }
         
         Question question = new Question(null, null);
 
@@ -41,6 +52,8 @@ public class QuestionActionImplementation implements QuestionActionService {
         question.setUserSpace(userSpace.get());
 
         questionRepo.save(question);
+
+        messages.add("Pergunta feita com sucesso!");
 
         return new PostQuestionResponseDto(question, messages);
     }

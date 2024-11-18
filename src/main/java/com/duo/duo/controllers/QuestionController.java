@@ -48,9 +48,9 @@ public class QuestionController {
     }
 
     @PostMapping("")
-    public ResponseEntity<PostQuestionResponseDto> postQuestion(@RequestBody PostQuestionDto data) {
+    public ResponseEntity<PostQuestionResponseDto> postQuestion(@RequestAttribute("token") Token token, @RequestBody PostQuestionDto data) {
         
-        PostQuestionResponseDto response = questionService.postQuestion(data);
+        PostQuestionResponseDto response = questionService.postQuestion(data, token);
 
         if (!response.messages().isEmpty()) {
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);

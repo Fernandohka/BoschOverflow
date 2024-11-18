@@ -82,7 +82,6 @@ public class SpaceActionImplementation implements SpaceActionsService{
             } else {
                 permission.setPermissionLevel(userSpace.permission());                  //? USUÁRIO MEMBRO - NÍVEL DE PERMISSÃO (2) */
             }
-    
             
             Space foundSpace = spaceRepo.findById(userSpace.spaceId()).get();
             User foundUser = userRepo.findById(userSpace.userId()).get();
