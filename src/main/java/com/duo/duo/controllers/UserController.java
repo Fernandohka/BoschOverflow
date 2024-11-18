@@ -25,6 +25,11 @@ public class UserController {
     @PostMapping("/user")
     public ResponseEntity<ResponseNewUserDto> createUser(@RequestBody NewUserDto newUserData) {
 
+        /*
+            * Aqui temos a função que verifica se os campos estão nulos ou vazios!
+            * Abaixo da verificação dos campos, há a criação da lista "erros", que será utilizada no retorno dos dados ao frontEnd.
+        */ 
+
         ResponseNewUserDto response = userService.checkFields(newUserData);
         ArrayList<String> errors = response.messages();
 

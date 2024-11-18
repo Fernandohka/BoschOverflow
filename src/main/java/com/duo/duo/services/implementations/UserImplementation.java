@@ -27,6 +27,9 @@ public class UserImplementation implements UserService {
     @Autowired
     JwtService<Token> jwtService;
 
+    // * Função padrão de usuário criado. Essa função só irá rodar no Controller caso a função CheckFields não retorne erro.
+    // * Aqui a senha é decodificada
+
     @Override
     public User CreateUser(NewUserDto newUserData) {
 
@@ -41,6 +44,8 @@ public class UserImplementation implements UserService {
 
         return newUser;
     }
+
+    // * Login que pode ser feito tanto com Email, quanto com nome ou EDV. 
 
     @Override
     public ResponseLoginDto Login(LoginDto loginData) {
@@ -74,6 +79,13 @@ public class UserImplementation implements UserService {
         messages.add("Usuário logado com sucesso!");
         return new ResponseLoginDto(jwt, messages);
     }
+
+    /*
+     * Verificação dos campos e de usuário ja cadastrado com os dados informados
+     * Note que a lista "users" é atualizada sempre, para podermos retornar diferentes tipos de erros
+     * Caso não tenha nenhum desses erros, retornamos a nossa lista vazia, que é verificada no controller
+     * Caso a lista seja vazia, o usuário é criado 
+    */
 
     @Override
     public ResponseNewUserDto checkFields(NewUserDto newUserData) {
@@ -109,6 +121,12 @@ public class UserImplementation implements UserService {
         
         return response;
     }
+
+    /*
+     * Funções que verificam campos vazios 
+     * As funções foram feitas para reduzir o corpo do código de Login e Registro.
+     * É feita a verificação tanto de NULL quanto de "" para ambos os casos serem barrados.
+    */
 
     public Boolean verifyFieldsRegister(NewUserDto newUserData) {
         if (newUserData.password() == null || newUserData.name() == null || newUserData.mail() == null) {
