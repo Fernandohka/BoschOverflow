@@ -5,15 +5,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.duo.duo.dto.Token;
-import com.duo.duo.dto.LoginDto.LoginDto;
-import com.duo.duo.dto.LoginDto.ResponseLoginDto;
 import com.duo.duo.dto.UserDto.NewUserDto;
 import com.duo.duo.dto.UserDto.ResponseNewUserDto;
 import com.duo.duo.model.User;
 import com.duo.duo.repositories.UserRepository;
 import com.duo.duo.services.EncoderService;
-import com.duo.duo.services.JwtService;
 import com.duo.duo.services.UserService;
 
 public class UserImplementation implements UserService {
@@ -23,9 +19,6 @@ public class UserImplementation implements UserService {
 
     @Autowired
     EncoderService encoder;
-
-    @Autowired
-    JwtService<Token> jwtService;
 
     // * Função padrão de usuário criado. Essa função só irá rodar no Controller caso a função CheckFields não retorne erro.
     // * Aqui a senha é decodificada
@@ -43,41 +36,6 @@ public class UserImplementation implements UserService {
         userRepo.save(newUser);
 
         return newUser;
-    }
-
-    // * Login que pode ser feito tanto com Email, quanto com nome ou EDV. 
-
-    @Override
-    public ResponseLoginDto Login(LoginDto loginData) {
-
-        List<User> users = userRepo.loginMailOrNameOrEDV(loginData.login());
-
-        ArrayList<String> messages = new ArrayList<>();
-
-        if (!verifyFieldsLogin(loginData)) {
-            messages.add("Preencha todos os campos;");
-            return new ResponseLoginDto(null, messages);
-        }
-
-        if (users.isEmpty()) {
-            messages.add("Usuário não encontrado!");
-            return new ResponseLoginDto(null, messages);
-        }
-        
-        User user = users.get(0);
-
-        if (!encoder.validate(loginData.password(), user.getPassword())) {
-            messages.add("Senha inválida!");
-            return new ResponseLoginDto(null, messages);
-        }
-
-        Token token = new Token();
-        token.setId(user.getId());
-
-        var jwt = jwtService.get(token);
-
-        messages.add("Usuário logado com sucesso!");
-        return new ResponseLoginDto(jwt, messages);
     }
 
     /*
@@ -134,13 +92,5 @@ public class UserImplementation implements UserService {
         }
         
         return !newUserData.password().equals("") || newUserData.name().equals("") || newUserData.mail().equals("");
-    }
-
-    public Boolean verifyFieldsLogin(LoginDto loginData) {
-        if (loginData.password() == null || loginData.login() == null) {
-            return false;
-        }
-        
-        return !loginData.password().equals("") || loginData.login().equals("");
     }
 }

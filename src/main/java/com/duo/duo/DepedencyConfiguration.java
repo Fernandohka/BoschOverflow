@@ -8,11 +8,13 @@ import com.duo.duo.dto.Token;
 import com.duo.duo.services.EncoderService;
 import com.duo.duo.services.JwtService;
 import com.duo.duo.services.SpaceActionsService;
+import com.duo.duo.services.UserAuthService;
 import com.duo.duo.services.UserService;
 import com.duo.duo.services.UserValidateService;
 import com.duo.duo.services.implementations.EncoderImplementation;
 import com.duo.duo.services.implementations.JwtImplementation;
 import com.duo.duo.services.implementations.SpaceActionImplementation;
+import com.duo.duo.services.implementations.UserAuthImplementation;
 import com.duo.duo.services.implementations.UserImplementation;
 import com.duo.duo.services.implementations.UserValidateImplementation;
 
@@ -55,4 +57,9 @@ public class DepedencyConfiguration {
         return new JwtImplementation();
     }
     
+
+    @Bean
+    public UserAuthService authService() {
+        return new UserAuthImplementation();
+    }
 }
