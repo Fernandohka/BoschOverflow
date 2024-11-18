@@ -16,11 +16,6 @@ import com.duo.duo.repositories.UserRepository;
 import com.duo.duo.repositories.UserSpaceRepository;
 import com.duo.duo.services.SpaceActionsService;
 
-
-/*
-    * Response DTO - record que retorna um objeto genérico T e uma mensagem 
-*/
- 
 public class SpaceActionImplementation implements SpaceActionsService{
 
     @Autowired
@@ -36,7 +31,7 @@ public class SpaceActionImplementation implements SpaceActionsService{
     public Boolean checkSpaceNameForPost(String name) {
         Space found = spaceRepo.findByName(name);
 
-        return found != null; // se encontrsr, retorna falso por não pode ser usaod;
+        return found != null;                                  // se encontrar, retorna falso, pois não se pode usar esse nome em um novo espaço;
     }
 
     @Override
@@ -56,18 +51,17 @@ public class SpaceActionImplementation implements SpaceActionsService{
         spaceRepo.save(newSpace);
         permissionRepo.save(permission);
 
-
         return newSpace;
     }
 
     @Override
-    public Boolean checkForSpace(Long id) {
+    public Boolean checkForSpace(Long id) {                 // verifica com base no id se um espaço existe
         Space found = spaceRepo.findById(id).get();
         return found != null;
     }
 
     @Override
-    public Boolean checkForUser(Long id) {
+    public Boolean checkForUser(Long id) {                 // verifica com base no id se um usuário existe
         User found = userRepo.findById(id).get();
         return found != null;
     }
@@ -75,19 +69,19 @@ public class SpaceActionImplementation implements SpaceActionsService{
     @Override
     public UserSpace manageSpaceUsers(AddUserToSpace userSpace) {
 
-        Optional<UserSpace> found = permissionRepo.findPermission(userSpace.userId(), userSpace.spaceId() ); // tenta achar uma permissão para aquele uusário - caso ache, realiza um PATCH, se não, cria uma permissão nova
-
+        Optional<UserSpace> found = permissionRepo.findPermission(userSpace.userId(), userSpace.spaceId() );    // tenta achar uma permissão para aquele uusário 
+                                                                                                                // - caso ache, realiza um PATCH, se não, cria uma permissão nova
 
         if (found.isEmpty()) {
             UserSpace permission = new UserSpace();
 
             if (userSpace.permission() < 1 || userSpace.permission() > 3) {
-                permission.setPermissionLevel(2); //se o front mandar errado deixa como user default
+                permission.setPermissionLevel(2);                       //se o front mandar uma permissão que não existe (menor que 1 ou maior que 3)
+                                                                                        // transforma em usuário default (permissão 2)
     
             } else {
-                permission.setPermissionLevel(userSpace.permission()); //? USUÁRIO MEMBRO - NÍVEL DE PERMISSÃO (2) */
+                permission.setPermissionLevel(userSpace.permission());                  //? USUÁRIO MEMBRO - NÍVEL DE PERMISSÃO (2) */
             }
-    
     
             
             Space foundSpace = spaceRepo.findById(userSpace.spaceId()).get();
@@ -103,7 +97,14 @@ public class SpaceActionImplementation implements SpaceActionsService{
         } else {
 
             var foundPermission = found.get();
-            foundPermission.setPermissionLevel(userSpace.permission());
+            if (userSpace.permission() < 1 || userSpace.permission() > 3) {
+                foundPermission.setPermissionLevel(2);                  //se o front mandar uma permissão que não existe (menor que 1 ou maior que 3)
+                                                                                        // transforma em usuário default (permissão 2)
+    
+            } else {
+                foundPermission.setPermissionLevel(userSpace.permission());             //? USUÁRIO MEMBRO - NÍVEL DE PERMISSÃO (2) */
+            }
+
             permissionRepo.save(foundPermission);
 
             return foundPermission; 
@@ -114,42 +115,36 @@ public class SpaceActionImplementation implements SpaceActionsService{
     }
 
     @Override
-    public Space deleteSpace(Space space) {
+    public Space deleteSpace(Space space) {                                             // deleta o espaço 
 
         spaceRepo.delete(space);
 
         return space;
     }
 
-    @Override
+    @Override                                                                           // recebe um nome, um page e um limit e realiza a paginação 
+                                                                                        //- a lógica agora é com o front ;) até aqui ta rodando liso :*
     public ArrayList<Space> getSpaces(String name, Integer page, Integer limit) {
 
-        System.out.println(name);
-        System.out.println(page);
-        System.out.println(limit);
 
-        var results = spaceRepo.findByNameContains(name, PageRequest.of(page, limit)); // ai que medo
+        // ? findByNameContains: procura no banco por NOMES que CONTENHAM (%LIKE%) o parâmetro name
+        var results = spaceRepo.findByNameContains(name, PageRequest.of(page, limit)); 
         
         return new ArrayList<>(results);
     }
 
     @Override
-    public Integer checkUserPermission(Long userId, Long spaceId) {
-        
-        System.out.println(spaceId);
-        System.out.println(userId);
+    public Boolean checkUserPermission(Long userId, Long spaceId) {
     
         Optional<UserSpace> found = permissionRepo.findPermission(userId, spaceId);
     
-        // Safe handling: Check if the Optional is present
         if (found.isEmpty()) {
             System.out.println("No permission found for the given userId and spaceId.");
-            return null; // Return null if not found
         }
 
         UserSpace userSpace = found.get();
     
-        return userSpace.getPermissionLevel();
+        return userSpace.getPermissionLevel() == 3;
         
     }
 
