@@ -99,7 +99,7 @@ public class QuestionActionImplementation implements QuestionActionService {
 
     @Override
     public ArrayList<Question> getAllQuestions(Long spaceId, Integer page, Integer limit) {
-        var results = questionRepo.findBySpaceId(spaceId, PageRequest.of(page, limit)); 
+        var results = questionRepo.findByUserSpaceId(spaceId, PageRequest.of(page, limit)); 
 
         return new ArrayList<>(results);
 
