@@ -6,7 +6,6 @@ html, body {
     overflow: hidden !important;
 }
 
-
 .mainContainer {
     display: flex !important;
     align-items: center;
@@ -45,6 +44,7 @@ html, body {
     max-width: 300px;
     background-color: #2A3236;
     border: none;
+    border-bottom: solid 2px #18837e;
 }
 
 .btnInput
@@ -60,7 +60,7 @@ html, body {
 }
 
 .btnInput:hover {
-     background-color: #9e2896;
+     background-color: #18837e;
 }
 
 .label {
@@ -71,4 +71,9 @@ html, body {
 
 .titleStyle{
     color: white;
+}
+
+.btGoToLogin {
+    text-decoration: none;
+    color: inherit;
 }
