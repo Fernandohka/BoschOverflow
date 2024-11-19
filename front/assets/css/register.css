@@ -49,7 +49,7 @@ html, body {
     /* border-bottom: solid 2px #18837e; */
 }
 
-.btnInput
+.btGoToLogin
 {
     margin-top: 20px;
     padding: 15px;
@@ -59,9 +59,11 @@ html, body {
     border: none;
     color: white;
     transition:  0.5s all ease;
+    text-decoration: none;
+    text-align: center;
 }
 
-.btnInput:hover {
+.btGoToLogin:hover {
      background-color: #18837e;
 }
 
@@ -75,12 +77,25 @@ html, body {
     color: white;
 }
 
-.btGoToLogin {
-    text-decoration: none;
-    color: inherit;
-}
 
 .link {
     text-decoration: none;
     color: #007bc0;
+}
+
+.botao {
+    width: 150px;
+    height: 40px;
+    border-radius: 8px;
+    border: none;
+    background-color: rgb(71, 71, 71);
+    color: white;
+    /* transition: ease-in-out 0.3s; */
+}
+
+.botao:hover {
+    /* background-color: #9e2896; */
+    background-image: url("../img/coloridinho.jpg");
+    background-size: cover;
+    filter: grayscale(50%);
 }
