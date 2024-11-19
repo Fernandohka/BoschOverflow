@@ -2,6 +2,10 @@ body {
     background-color: rgb(71, 71, 71);
 }
 
+h6 {
+    margin: 0;
+}
+
 .logo {
     width: 80px;
     object-fit: cover;
@@ -10,4 +14,86 @@ body {
 
 .nav {
     padding: 10px;
+}
+
+.box {
+    display: flex;
+    max-width: 500px;
+    width: 90%;
+    background-color: rgb(32, 32, 32);
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 50px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.containerA {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 90vh !important;
+}
+
+.formBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    max-width: 350px;
+    width: 90%;
+}
+
+.inputBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 90%;
+}
+
+.label {
+    align-self: flex-start;
+    font-size: 20px;
+}
+
+.input {
+    width: 100%;
+    height: 40px;
+    border-radius: 8px;
+    border: none;
+    padding: 10px;
+    background-color: rgb(71, 71, 71);
+    color: white;
+}
+
+.botao {
+    width: 150px;
+    height: 40px;
+    border-radius: 8px;
+    border: none;
+    background-color: rgb(71, 71, 71);
+    color: white;
+    transition: ease-in-out 0.3s;
+}
+
+.botao:hover {
+    background-color: #9e2896;
+}
+
+.boxRegister {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.link {
+    text-decoration: none;
+    color: #007bc0;
 }
