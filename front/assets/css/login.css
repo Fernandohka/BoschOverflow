@@ -1,16 +1,5 @@
-body {
-    background-color: rgb(71, 71, 71);
-    overflow: hidden;
-}
-
 h6 {
     margin: 0;
-}
-
-.nav {
-    padding: 0 !important;
-    flex-direction: column;
-    background-color: black;
 }
 
 .box {
@@ -96,10 +85,4 @@ h6 {
 .link {
     text-decoration: none;
     color: #007bc0;
-}
-
-.coloridinho {
-    height: 10px;
-    width: 100vw;
-    object-fit: cover;
 }
