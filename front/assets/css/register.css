@@ -13,6 +13,7 @@ html, body {
     width: 100% !important;
     height: 100% !important;
     background-color: #202224; 
+    flex-wrap: wrap;
 }
 
 .box {
@@ -24,8 +25,9 @@ html, body {
     background-color: #18191a;  
     border-radius: 10px;
     min-width: auto;
-    width: 400px;
+    width: 500px;
     height: 640px;
+    flex-wrap: wrap;
 }
 
 .inputBox {
@@ -34,6 +36,7 @@ html, body {
     align-items: center;
     flex-direction: column;
     width: 70%;
+    flex-wrap: wrap;
 }
 
 .inputStyle{
@@ -75,4 +78,9 @@ html, body {
 .btGoToLogin {
     text-decoration: none;
     color: inherit;
+}
+
+.link {
+    text-decoration: none;
+    color: #007bc0;
 }
