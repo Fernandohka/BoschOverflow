@@ -26,7 +26,6 @@ html, body {
     min-width: auto;
     width: 400px;
     height: 640px;
-    box-shadow: 0 0 20px #ffffff0e;
 }
 
 .inputBox {
@@ -38,13 +37,13 @@ html, body {
 }
 
 .inputStyle{
-    padding: 15px;
-    border-radius: 20px;
+    padding: 7px;
+    border-radius: 7px;
     width: 100%;
     max-width: 300px;
-    background-color: #2A3236;
+    background-color: rgb(71, 71, 71);
     border: none;
-    border-bottom: solid 2px #18837e;
+    /* border-bottom: solid 2px #18837e; */
 }
 
 .btnInput
@@ -53,7 +52,7 @@ html, body {
     padding: 15px;
     border-radius: 20px;
     width: 65% !important;
-    background-color: #2A3236;
+    background-color: rgb(71, 71, 71);
     border: none;
     color: white;
     transition:  0.5s all ease;
