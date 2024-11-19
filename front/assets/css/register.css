@@ -1,6 +1,5 @@
 html, body {
-    margin: 0;
-    padding: 0;
+
     height: 100%; 
     width: 100%; 
     overflow: hidden !important;
@@ -10,9 +9,8 @@ html, body {
     display: flex !important;
     align-items: center;
     justify-content: center;    
-    width: 100% !important;
     height: 100% !important;
-    background-color: #202224; 
+    /* background-color: #202224;  */
     flex-wrap: wrap;
 }
 
