@@ -83,7 +83,9 @@ h6 {
 }
 
 .botao:hover {
-    background-color: #9e2896;
+    /* background-color: #9e2896; */
+    background-image: url("../img/coloridinho.jpg");
+    background-size: cover;
 }
 
 .boxRegister {
