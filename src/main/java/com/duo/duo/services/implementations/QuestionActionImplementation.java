@@ -6,11 +6,11 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 
-import com.duo.duo.dto.Token;
 import com.duo.duo.dto.QuestionDto.DeleteQuestionDto;
 import com.duo.duo.dto.QuestionDto.GetQuestionDto;
 import com.duo.duo.dto.QuestionDto.PostQuestionDto;
 import com.duo.duo.dto.QuestionDto.PostQuestionResponseDto;
+import com.duo.duo.dto.Token;
 import com.duo.duo.model.Question;
 import com.duo.duo.model.UserSpace;
 import com.duo.duo.repositories.QuestionRepository;
@@ -25,27 +25,34 @@ public class QuestionActionImplementation implements QuestionActionService {
     @Autowired
     UserSpaceRepository userSpaceRepo;
 
+    /* 
+     * Aqui a pergunta só é feita caso todos os campos estejam corretos e o espaço seja encontrado 
+    */
     @Override
     public PostQuestionResponseDto postQuestion(PostQuestionDto data, Token token) {
 
         ArrayList<String> messages = new ArrayList<>();
-
         
         if (!checkFields(data)) {
             messages.add("Preencha todos os campos!");
-            return new PostQuestionResponseDto(null, messages);
+            return new PostQuestionResponseDto(messages);
         }
         
         Optional<UserSpace> getUserSpace = userSpaceRepo.findById(data.idUserSpace());
+
+        if (getUserSpace.isEmpty()) {
+            messages.add("Espaço não encontrado!");
+            return new PostQuestionResponseDto(messages);
+        }
 
         UserSpace userSpace = getUserSpace.get();
 
         if (userSpace.getPermissionLevel() < 2) {
             messages.add("Você não tem permissão para fazer uma pergunta!");
-            return new PostQuestionResponseDto(null, messages);
+            return new PostQuestionResponseDto(messages);
         }
         
-        Question question = new Question(null, null);
+        Question question = new Question();
 
         question.setDescription(data.description());
         question.setUserSpace(userSpace);
@@ -54,38 +61,51 @@ public class QuestionActionImplementation implements QuestionActionService {
 
         messages.add("Pergunta feita com sucesso!");
 
-        return new PostQuestionResponseDto(question, messages);
+        return new PostQuestionResponseDto(messages);
     }
 
+    /*
+     * Função onde pegamos uma pergunta apenas 
+    */
     @Override
     public GetQuestionDto getQuestion(Long id) {
         
-        Optional<Question> question = questionRepo.findById(id);
+        Optional<Question> getQuestion = questionRepo.findById(id);
         ArrayList<String> messages =  new ArrayList<>();
-
-        if (question.isEmpty()) {
+        
+        if (getQuestion.isEmpty()) {
             messages.add("A pergunta não foi encontrada!");
-            return new GetQuestionDto(null, messages);
+            return new GetQuestionDto(null, null, messages);
         }
+        
+        Question question = getQuestion.get();
 
-        return new GetQuestionDto(question.get(), messages);
+        return new GetQuestionDto(question.getDescription(), question.getUserSpace().getUser().getId(), messages);
     }
 
+    /*
+     * Aqui a pergunta é deletada caso os devidos ID's estejam corretos e a permissão esteja correta 
+*/
     @Override
-    public DeleteQuestionDto deleteQuestion(Long idQuestion, Long idUser) {
+    public DeleteQuestionDto deleteQuestion(Long idQuestion) {
 
-        UserSpace userSpace = userSpaceRepo.findByUserId(idUser);
-        Optional<Question> question = questionRepo.findById(idQuestion);
+        Optional<Question> getQuestion = questionRepo.findById(idQuestion);
+        Question question = getQuestion.get();
+
+        UserSpace userSpace = question.getUserSpace();
 
         if (userSpace.getPermissionLevel() < 3) {
             return new DeleteQuestionDto(0, "Você não tem permissão para deletar essa pergunta!");
         }
 
-        questionRepo.delete(question.get());
+        questionRepo.delete(question);
 
         return new DeleteQuestionDto(1, "Pergunta deletada com sucesso!");
     }
 
+    /*
+     * Apenas uma função para verificar os campos 
+    */
     public Boolean checkFields(PostQuestionDto data) {
 
         if (data.description() == null || data.idUserSpace() == null || 
@@ -97,9 +117,12 @@ public class QuestionActionImplementation implements QuestionActionService {
         return true;
     }
 
+    /*
+     * Função onde pegamos todas as perguntas de um espaço, com paginação 
+    */
     @Override
     public ArrayList<Question> getAllQuestions(Long spaceId, Integer page, Integer limit) {
-        var results = questionRepo.findBySpaceId(spaceId, PageRequest.of(page, limit)); 
+        var results = questionRepo.findByUserSpaceId(spaceId, PageRequest.of(page, limit)); 
 
         return new ArrayList<>(results);
 

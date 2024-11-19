@@ -22,12 +22,6 @@ public class Question {
     @JoinColumn(name="userSpaceId")
     private UserSpace userSpace;
 
-    
-    public Question(UserSpace userSpace, String description){
-        this.description = description;
-        this.userSpace = userSpace;
-    }
-
     public Long getId() {
         return Id;
     }

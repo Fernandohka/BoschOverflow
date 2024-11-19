@@ -15,9 +15,7 @@ import com.duo.duo.model.UserSpace;
 import com.duo.duo.repositories.AnswerRepository;
 import com.duo.duo.repositories.QuestionRepository;
 import com.duo.duo.repositories.UserRepository;
-import com.duo.duo.repositories.UserSpaceRepository;
 import com.duo.duo.services.AnswerService;
-import com.duo.duo.services.SpaceActionsService;
 
 public class AnswerImplementation implements AnswerService {
 
@@ -25,14 +23,14 @@ public class AnswerImplementation implements AnswerService {
     QuestionRepository questionRepo;
 
     @Autowired
-    UserSpaceRepository userSpaceRepo;
-
-    @Autowired
     AnswerRepository answerRepo;
 
     @Autowired
     UserRepository userRepo;
 
+    /*
+     * É feito o post de uma resposta caso seja encontrada a pergunta no devido espaço. 
+    */
     @Override
     public NewAnswerResponseDto postAnswer(NewAnswerDto data, Long idUser) {
 
@@ -46,7 +44,7 @@ public class AnswerImplementation implements AnswerService {
 
         Question question = getQuestion.get();
 
-        UserSpace userSpace = userSpaceRepo.findByUserId(idUser);
+        UserSpace userSpace = question.getUserSpace();
 
         if (userSpace.getPermissionLevel() < 2)
             return new NewAnswerResponseDto(1, "Você não tem permissão para fazer uma pergunta!");
@@ -59,9 +57,12 @@ public class AnswerImplementation implements AnswerService {
 
         answerRepo.save(newAnswer);
 
-        return new NewAnswerResponseDto(2, "Pergunta postada com sucesso!");
+        return new NewAnswerResponseDto(2, "Resposta postada com sucesso!");
     }
 
+    /*
+     * Função que pega as respostas de uma pergunta 
+    */
     @Override
     public GetAnswersResponse getAnswers(Long questionId) {
 

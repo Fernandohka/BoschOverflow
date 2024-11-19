@@ -12,7 +12,7 @@ import com.duo.duo.model.UserSpace;
 @Repository
 public interface UserSpaceRepository extends JpaRepository<UserSpace, Long>{
     public UserSpace findByUserId(Long userId);
-
+    public UserSpace findBySpaceId(Long spaceId);
 
     // query nativa do SQL Server 
     @Query(value = "SELECT * FROM user_space WHERE user_id = :user_id and space_id = :space_id", nativeQuery = true)

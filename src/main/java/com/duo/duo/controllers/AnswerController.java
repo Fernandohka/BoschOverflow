@@ -27,6 +27,9 @@ public class AnswerController {
     @Autowired
     AnswerService answerService;
     
+    /*
+     * Função de postar uma resposta, aqui, a função de "postAnswer" da Service, retorna uma Dto com result, para tratar os erros.  
+    */
     @PostMapping("")
     public ResponseEntity<String> postAnswer(@RequestAttribute("token") Token token, @RequestBody NewAnswerDto data) {
         
