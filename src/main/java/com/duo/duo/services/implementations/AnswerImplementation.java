@@ -15,16 +15,12 @@ import com.duo.duo.model.UserSpace;
 import com.duo.duo.repositories.AnswerRepository;
 import com.duo.duo.repositories.QuestionRepository;
 import com.duo.duo.repositories.UserRepository;
-import com.duo.duo.repositories.UserSpaceRepository;
 import com.duo.duo.services.AnswerService;
 
 public class AnswerImplementation implements AnswerService {
 
     @Autowired
     QuestionRepository questionRepo;
-
-    @Autowired
-    UserSpaceRepository userSpaceRepo;
 
     @Autowired
     AnswerRepository answerRepo;

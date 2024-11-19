@@ -74,6 +74,25 @@ public class UserImplementation implements UserService {
         if (!users.isEmpty()) {
             messages.add("Já existe um usuário cadastrado com este EDV!");
         }
+
+        /*
+         * Verificação da senha por se possui 12 caracteres, se contém número, se possui letra minúscula e se possui letra maiúscula, respectivamente. 
+        */
+        if (newUserData.password().length() < 12) {
+            messages.add("A senha precisa conter no mínimo 12 caracteres!");
+        }
+
+        if (!newUserData.password().matches("[0-9]")) {
+            messages.add("A senha precisa conter no mínimo 1 número!");
+        }
+
+        if (!newUserData.password().matches("[a-z]")) {
+            messages.add("A senha precisa conter no mínimo uma letra minúscula!");
+        }
+
+        if (!newUserData.password().matches("[A-Z]")) {
+            messages.add("A senha precisa conter no mínimo uma letra maiúscula!");
+        }
         
         ResponseNewUserDto response = new ResponseNewUserDto(null, messages);
         
