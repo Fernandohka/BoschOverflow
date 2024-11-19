@@ -28,11 +28,18 @@ public class QuestionController {
     @Autowired
     QuestionActionService questionService;
     
+    /*
+     * Função de pegar as perguntas pelo space 
+    */
     @GetMapping("/by-space/{space}")
     public String getPageableQuestions(@PathVariable String space, String page, String size) {
 
         return new String();
     }
+
+    /*
+     * Função de pegar apenas uma pergunta 
+    */
 
     @GetMapping("/by-id/{id}")
     public ResponseEntity<GetQuestionDto> getQuestion(@PathVariable Long id) {
@@ -46,6 +53,10 @@ public class QuestionController {
         return new ResponseEntity<>(question, HttpStatus.OK);
     }
 
+
+    /*
+     * Post de uma pergunta 
+    */
     @PostMapping("")
     public ResponseEntity<PostQuestionResponseDto> postQuestion(@RequestAttribute("token") Token token, @RequestBody PostQuestionDto data) {
         
@@ -58,6 +69,9 @@ public class QuestionController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    /*
+     * Essa função deleta uma pergunta 
+    */
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteQuestion(@RequestAttribute("token") Token token, @PathVariable Long id) {
 

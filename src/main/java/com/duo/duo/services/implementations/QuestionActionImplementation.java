@@ -25,6 +25,9 @@ public class QuestionActionImplementation implements QuestionActionService {
     @Autowired
     UserSpaceRepository userSpaceRepo;
 
+    /* 
+     * Aqui a pergunta só é feita caso todos os campos estejam corretos e o espaço seja encontrado 
+    */
     @Override
     public PostQuestionResponseDto postQuestion(PostQuestionDto data, Token token) {
 
@@ -61,6 +64,9 @@ public class QuestionActionImplementation implements QuestionActionService {
         return new PostQuestionResponseDto(messages);
     }
 
+    /*
+     * Função onde pegamos uma pergunta apenas 
+    */
     @Override
     public GetQuestionDto getQuestion(Long id) {
         
@@ -77,6 +83,9 @@ public class QuestionActionImplementation implements QuestionActionService {
         return new GetQuestionDto(question.getDescription(), question.getUserSpace().getUser().getId(), messages);
     }
 
+    /*
+     * Aqui a pergunta é deletada caso os devidos ID's estejam corretos e a permissão esteja correta 
+*/
     @Override
     public DeleteQuestionDto deleteQuestion(Long idQuestion) {
 
@@ -94,6 +103,9 @@ public class QuestionActionImplementation implements QuestionActionService {
         return new DeleteQuestionDto(1, "Pergunta deletada com sucesso!");
     }
 
+    /*
+     * Apenas uma função para verificar os campos 
+    */
     public Boolean checkFields(PostQuestionDto data) {
 
         if (data.description() == null || data.idUserSpace() == null || 
@@ -105,6 +117,9 @@ public class QuestionActionImplementation implements QuestionActionService {
         return true;
     }
 
+    /*
+     * Função onde pegamos todas as perguntas de um espaço, com paginação 
+    */
     @Override
     public ArrayList<Question> getAllQuestions(Long spaceId, Integer page, Integer limit) {
         var results = questionRepo.findByUserSpaceId(spaceId, PageRequest.of(page, limit)); 

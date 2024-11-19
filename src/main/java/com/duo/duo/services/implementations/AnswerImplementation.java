@@ -32,6 +32,9 @@ public class AnswerImplementation implements AnswerService {
     @Autowired
     UserRepository userRepo;
 
+    /*
+     * É feito o post de uma resposta caso seja encontrada a pergunta no devido espaço. 
+    */
     @Override
     public NewAnswerResponseDto postAnswer(NewAnswerDto data, Long idUser) {
 
@@ -61,6 +64,9 @@ public class AnswerImplementation implements AnswerService {
         return new NewAnswerResponseDto(2, "Resposta postada com sucesso!");
     }
 
+    /*
+     * Função que pega as respostas de uma pergunta 
+    */
     @Override
     public GetAnswersResponse getAnswers(Long questionId) {
 
