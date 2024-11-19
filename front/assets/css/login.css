@@ -1,19 +1,16 @@
 body {
     background-color: rgb(71, 71, 71);
+    overflow: hidden;
 }
 
 h6 {
     margin: 0;
 }
 
-.logo {
-    width: 80px;
-    object-fit: cover;
-    height: 50px;
-}
-
 .nav {
-    padding: 10px;
+    padding: 0 !important;
+    flex-direction: column;
+    background-color: black;
 }
 
 .box {
@@ -79,13 +76,14 @@ h6 {
     border: none;
     background-color: rgb(71, 71, 71);
     color: white;
-    transition: ease-in-out 0.3s;
+    /* transition: ease-in-out 0.3s; */
 }
 
 .botao:hover {
     /* background-color: #9e2896; */
     background-image: url("../img/coloridinho.jpg");
     background-size: cover;
+    filter: grayscale(50%);
 }
 
 .boxRegister {
@@ -98,4 +96,10 @@ h6 {
 .link {
     text-decoration: none;
     color: #007bc0;
+}
+
+.coloridinho {
+    height: 10px;
+    width: 100vw;
+    object-fit: cover;
 }
