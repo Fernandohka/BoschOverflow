@@ -1,16 +1,15 @@
-html, body {
-
+/* html, body {
     height: 100%; 
     width: 100%; 
     overflow: hidden !important;
-}
+} */
 
 .mainContainer {
     display: flex !important;
     align-items: center;
     justify-content: center;    
-    height: 100% !important;
-    /* background-color: #202224;  */
+    height: 93vh !important;
+    background-color: rgb(71, 71, 71);
     flex-wrap: wrap;
 }
 
@@ -20,16 +19,17 @@ html, body {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    background-color: #18191a;  
+    background-color: rgb(32, 32, 32);
     border-radius: 10px;
-    min-width: auto;
     width: 500px;
     height: 640px;
     flex-wrap: wrap;
+    max-height: 85vh;
+    padding-top: 10px;
+    max-width: 95vw;
 }
 
 .inputBox {
-
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -41,7 +41,7 @@ html, body {
     padding: 7px;
     border-radius: 7px;
     width: 100%;
-    max-width: 300px;
+    max-width: 340px;
     background-color: rgb(71, 71, 71);
     border: none;
     /* border-bottom: solid 2px #18837e; */
@@ -56,13 +56,14 @@ html, body {
     background-color: rgb(71, 71, 71);
     border: none;
     color: white;
-    transition:  0.5s all ease;
     text-decoration: none;
     text-align: center;
 }
 
 .btGoToLogin:hover {
-     background-color: #18837e;
+    background-image: url("../img/coloridinho.jpg");
+    background-size: cover;
+    filter: grayscale(50%);
 }
 
 .label {
@@ -73,6 +74,7 @@ html, body {
 
 .titleStyle{
     color: white;
+    margin: 0;
 }
 
 

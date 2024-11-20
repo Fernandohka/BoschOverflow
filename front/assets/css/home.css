@@ -1,0 +1,72 @@
+.containerA {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.inputBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.input {
+    /* width: 50%; */
+    height: 40px;
+    border-radius: 8px;
+    border: none;
+    padding: 10px;
+    background-color: rgb(31, 31, 31);
+    color: white;
+}
+
+.button {
+    height: 30px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    border: none;
+    background-color: rgb(31, 31, 31);
+    padding-bottom: 5px;
+}
+
+.lupa {
+    height: 20px;
+}
+
+.modal-dark .modal-content {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+}
+
+.modal-dark .btn-secondary {
+    background-color: #555;
+    border: none;
+}
+
+.modal-dark .btn-secondary:hover {
+    background-color: #666;
+}
+
+.btn-space {
+    width: 90%;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    text-transform: capitalize;
+    transition: transform 0.2s ease-in-out, background-color 0.3s;
+}
+
+.btn-space:hover {
+    transform: scale(1.03);
+    background-color: #343a40;
+    color: white;
+}
+
+
+.d-flex {
+    justify-content: center;
+    align-items: center;
+}

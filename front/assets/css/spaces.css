@@ -1,0 +1,75 @@
+body {
+    background-color: rgb(71, 71, 71);
+    color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto !important;
+}
+
+body::-webkit-scrollbar {
+    width: 8px;
+}
+
+body::-webkit-scrollbar-track {
+    background: #333;
+    border-radius: 8px;
+}
+
+body::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 8px;
+    border: 2px solid #333;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background: #777;
+}
+
+.container {
+    background-color: #424242;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+
+.list-group-item {
+    background-color: #333;
+    color: #f8f9fa;
+    border: 1px solid #444;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    transition: all 0.2s ease;
+}
+
+.list-group-item:hover {
+    background-color: #555;
+    cursor: pointer;
+}
+
+.btn-dark {
+    margin: 2px;
+    height: 40px;
+}
+
+.navbar-brand img {
+    width: 50px;
+    height: auto;
+}
+
+.text-muted {
+    color: #bdbdbd !important;
+}
+
+.form-control {
+    height: 38px;
+}
+
+.inputBox {
+    display: flex;
+    justify-content: center;
+}
+
+.input-group {
+    align-items: center;
+    justify-content: center;
+}

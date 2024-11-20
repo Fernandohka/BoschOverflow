@@ -17,8 +17,42 @@
     </nav>
 
     <div class="containerA">
-        <input type="text">
+        <div class="inpuxBox">
+            <input type="text" class="input" placeholder="Search spaces">
+            <button class="button" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+                <img src="./assets/img/lupa.png" alt="lupa" class="lupa">
+            </button>
+        </div>
     </div>
+
+    <div class="modal fade modal-dark" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Spaces</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex flex-column align-items-center gap-3">
+
+                        <!-- Exemplo de como vão ficar os botões dos espaços, use isso para fazer a integração 😊 -->
+                        <a href="spaces.html" class="btn btn-dark btn-space">Space 1</a>
+                        <a href="spaces.html" class="btn btn-dark btn-space">Space 2</a>
+                        <a href="spaces.html" class="btn btn-dark btn-space">Space 3</a>
+                        <a href="spaces.html" class="btn btn-dark btn-space">Space 4</a>
+                        <a href="spaces.html" class="btn btn-dark btn-space">Space 5</a>
+
+                    </div>
+                </div>
+                
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </html>
