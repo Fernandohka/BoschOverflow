@@ -73,3 +73,33 @@ body::-webkit-scrollbar-thumb:hover {
     align-items: center;
     justify-content: center;
 }
+
+.btn-delete {
+    width: 100px;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    text-transform: capitalize;
+    transition: transform 0.2s ease-in-out, background-color 0.3s;
+    align-self: flex-end;
+}
+
+.btn-personalized {
+    background-color: rgb(133, 0, 0);
+    color: white;
+}
+
+.btn-delete:hover {
+    transform: scale(1.03);
+    background-color: #360000;
+    color: white;
+}
+
+.deletar {
+    display: flex;
+    width: 100vw;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 15px;
+    padding-top: 10px;
+}
