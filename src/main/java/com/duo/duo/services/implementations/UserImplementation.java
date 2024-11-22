@@ -82,17 +82,17 @@ public class UserImplementation implements UserService {
             messages.add("A senha precisa conter no mínimo 12 caracteres!");
         }
 
-        if (!newUserData.password().matches("[0-9]")) {
-            messages.add("A senha precisa conter no mínimo 1 número!");
-        }
+        // if (!newUserData.password().matches("[0-9]")) {
+        //     messages.add("A senha precisa conter no mínimo 1 número!");
+        // }
 
-        if (!newUserData.password().matches("[a-z]")) {
-            messages.add("A senha precisa conter no mínimo uma letra minúscula!");
-        }
+        // if (!newUserData.password().matches("[a-z]")) {
+        //     messages.add("A senha precisa conter no mínimo uma letra minúscula!");
+        // }
 
-        if (!newUserData.password().matches("[A-Z]")) {
-            messages.add("A senha precisa conter no mínimo uma letra maiúscula!");
-        }
+        // if (!newUserData.password().matches("[A-Z]")) {
+        //     messages.add("A senha precisa conter no mínimo uma letra maiúscula!");
+        // }
         
         ResponseNewUserDto response = new ResponseNewUserDto(null, messages);
         

@@ -3,7 +3,7 @@ async function  login(){
     let pass = document.getElementById("pass").value;
     console.log(login);
     console.log(pass);
-    res = await fetch("http://localhost:8080/user",{
+    let res = await fetch("http://localhost:8080/auth",{
         method:"POST",
         body:JSON.stringify({"login":login,"password":pass})
     });
