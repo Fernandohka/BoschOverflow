@@ -6,13 +6,18 @@ async function  register(){
 
     console.log(name,email,edv,password);
 
-    let res = await fetch("http://localhost:8080/user",{
+    await fetch("http://localhost:8080/user",{
         method:"POST",
         headers:{"Content-Type":"application/json"},
         body:JSON.stringify({"name":name,"mail":email,"password":password,"edv":edv})
     }).then((res)=>{
         res.json().then(data=>{
             console.log(data)
+            if(data.user){
+                alert("Criado com sucesso!!!");
+                window.location.replace("http://127.0.0.1:5500/login.html");
+                return;
+            }
             alert(data.messages)
         })
     });

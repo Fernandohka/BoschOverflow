@@ -19,7 +19,7 @@
     <div class="containerA">
         <div class="inpuxBox">
             <input type="text" class="input" placeholder="Search spaces">
-            <button class="button" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+            <button class="button" onclick="loadSpaces()" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
                 <img src="./assets/img/lupa.png" alt="lupa" class="lupa">
             </button>
         </div>
@@ -36,7 +36,7 @@
                     <div class="d-flex flex-column align-items-center gap-3">
 
                         <!-- Exemplo de como vão ficar os botões dos espaços, use isso para fazer a integração 😊 -->
-                        <a href="spaces.html" class="btn btn-dark btn-space">Space 1</a>
+                        <a href="spaces.html" onclick="toSpace(1)" class="btn btn-dark btn-space">Space 1</a>
                         <a href="spaces.html" class="btn btn-dark btn-space">Space 2</a>
                         <a href="spaces.html" class="btn btn-dark btn-space">Space 3</a>
                         <a href="spaces.html" class="btn btn-dark btn-space">Space 4</a>
@@ -53,6 +53,7 @@
         </div>
     </div>
 
+    <script src="assets/script/home.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

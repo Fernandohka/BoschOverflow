@@ -5,7 +5,7 @@ async function  login(){
     console.log(login);
     console.log(pass);
 
-    let res = await fetch("http://localhost:8080/auth",
+    await fetch("http://localhost:8080/auth",
     {
         method:"POST",
         headers:{"Content-Type":"application/json"},
@@ -17,7 +17,7 @@ async function  login(){
 
             if(data.token != null) {
                 sessionStorage.setItem("token", data.token);
-                window.location.href = "http://127.0.0.1:5500/front/home.html"
+                window.location.href = "http://127.0.0.1:5500/home.html"
             }
         })
     });
