@@ -44,7 +44,7 @@ public class AnswerController {
         return new ResponseEntity<>(response.message(), HttpStatus.OK);
     }
 
-    @GetMapping("{id}")
+    @GetMapping("{questionId}")
     public ResponseEntity<GetAnswersResponse> getAnswer(@PathVariable Long questionId) {
 
         GetAnswersResponse response = answerService.getAnswers(questionId);
