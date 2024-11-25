@@ -9,10 +9,13 @@ async function loadSpaces() {
         }
         res.json().then(data => {
             let boxSpace = document.getElementById("divSpaces")
+            boxSpace.innerHTML="";
             data.forEach(space => {
                 let a = document.createElement("a");
                 a.className = "btn btn-dark btn-space";
-                a.onclick = `toSpace(${space.id})`;
+                a.onclick = function(){
+                    toSpace(space.id)
+                };
                 a.text = space.name;
                 boxSpace.appendChild(a);
             });
