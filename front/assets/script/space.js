@@ -63,12 +63,13 @@ async function newPermission() {
 
 async function loadQuestions() {
     console.log("Bearer " + window.sessionStorage.getItem("token"))
-    await fetch(`http://localhost:8080/question/by-space/6?page=0&size=5`, {
+    await fetch(`http://localhost:8080/question/by-space/3?page=0&size=5`, {
         method: "GET",
         headers: { "Content-Type": "application/json", "Authorization": "Bearer " + window.sessionStorage.getItem("token") }
     }).then((res) => {
         console.log(res)
         res.json().then(data => {
+            console.log(data)
             let boxQuestion = document.getElementById("divQuestions");
             boxQuestion.innerHTML="";
             data.forEach(question => {
