@@ -29,25 +29,27 @@ async function loadAnswers() {
 }
 
 async function newAnswers() {
-    let userAnwser = document.getElementById("userAnswer").ariaValueMax;
-    console.log(userAnwser)
+    let userAnswer = document.getElementById("userAnswer").value;
+    console.log(userAnswer)
 
     await fetch(`http://localhost:8080/answer`, {
         method: "POST",
         headers: { "Content-Type": "application/json", "Authorization": "Bearer " + window.sessionStorage.getItem("token") },
         body:JSON.stringify({
             "questionId":window.localStorage.getItem("questionId"),
-            "description":userAnwser
+            "description":userAnswer
         })
     }).then((res) => {
         console.log(res)
         if(res.status>=200 && res.status<299){
             alert("Criado com sucesso!!")
+            loadAnswers();
             return
         }
         alert("Erro ao criar resposta!")
-        res.JSON().then(data=>{
-            console.log(data)
+        res.json().then(data=>{
+            console.log(data);
+            alert(data);
         })
     });
 }
