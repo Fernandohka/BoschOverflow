@@ -36,7 +36,7 @@ public class QuestionController {
      * Note que a URL é diferente da que está no quadro. Isso foi aprovado pelo Trevis 👍
      ! AVISO, NÃO HÁ TRATAMENTOS DE ERROS AQUI, CASO DÊ ERRO, PODE ALTERAR OU NOS AVISAR
     */
-    @GetMapping("/by-space/{space}")
+    @GetMapping("/by-space/{spaceId}")
     public ResponseEntity<ArrayList<Question>> getPageableQuestions(@PathVariable Long spaceId, Integer page, Integer size) {
 
         var questions = questionService.getAllQuestions(spaceId, page, size);

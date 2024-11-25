@@ -23,3 +23,36 @@ async function newQuest(){
             })
         });
 }
+
+async function loadQuestions() {
+    console.log("Bearer " + window.sessionStorage.getItem("token"))
+    await fetch(`http://localhost:8080/question/by-space/6?page=0&size=5`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json", "Authorization": "Bearer " + window.sessionStorage.getItem("token") }
+    }).then((res) => {
+        console.log(res)
+        res.json().then(data => {
+            let boxQuestion = document.getElementById("divQuestions");
+            boxQuestion.innerHTML="";
+            data.forEach(question => {
+                let li = document.createElement("li");
+                li.className = "list-group-item d-flex justify-content-between align-items-center";
+                li.innerHTML = `
+                    ${question.description}
+                    <div>
+                        <a href="question.html" class="btn btn-sm btn-dark">Ver pergunta</a>
+                        <a href="spaces.html" class="btn btn-sm btn-dark">Deletar</a>
+                    </div>
+                `
+                boxQuestion.appendChild(li);
+            });
+        })
+    });
+}
+
+async function toQuestion(id) {
+    window.localStorage.setItem("questionId", id);
+    window.location.href = "http://127.0.0.1:5500/question.html";
+}
+
+loadQuestions();
