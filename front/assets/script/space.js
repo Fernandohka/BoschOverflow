@@ -6,7 +6,7 @@ document.getElementById('saveChangesButton').addEventListener('click', function 
 });
 
 async function newQuest() {
-    spaceid = window.localStorage.getItem("spaceId").value
+    spaceid = window.localStorage.getItem("spaceId")
     questionInput = document.getElementById("questionInput").value
 
     console.log(spaceid, questionInput)
@@ -19,7 +19,7 @@ async function newQuest() {
             body: JSON.stringify({ "description": questionInput, "idUserSpace": spaceid })
         }).then((res) => {
             res.json().then(data => {
-                console.log(data)
+                alert(data.messages)
             })
         });
 }
@@ -90,6 +90,10 @@ async function loadQuestions() {
 async function toQuestion(id) {
     window.localStorage.setItem("questionId", id);
     window.location.href = "http://127.0.0.1:5500/question.html";
+}
+
+async function deleteSpace() {
+    alert("Erro ao deletar espaço!!");
 }
 
 loadQuestions();
