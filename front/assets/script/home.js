@@ -27,14 +27,3 @@ async function toSpace(id) {
     window.localStorage.setItem("spaceId", id);
     window.location.href = "http://127.0.0.1:5500/spaces.html"
 }
-
-// async function loadSpaces(data) {
-//     let boxSpace = document.getElementById("divSpace")
-//     data.forEach(space => {
-//            let a = document.createElement("a");
-//            a.className = "btn btn-dark btn-space";
-//            a.onclick = toSpace(space.id);
-//            a.text = space.name;
-//            boxSpace.appendChild(a);
-//     });
-// }

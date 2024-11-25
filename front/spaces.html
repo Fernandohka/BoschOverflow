@@ -26,7 +26,7 @@
             <h3 class="fw-semibold mb-4 text-light" style="align-self: center;">Gerenciar Usuários:</h3>
             <div class="input-group mb-3">
                 <input type="text" class="form-control" placeholder="Pesquisar usuário..." aria-label="Pesquisar usuário" id="searchInput">
-                <button class="btn btn-dark" type="button" id="searchButton" data-bs-toggle="modal" data-bs-target="#userListModal">
+                <button class="btn btn-dark" type="button" onclick="loadUser()" id="searchButton" data-bs-toggle="modal" data-bs-target="#userListModal" >
                     <img src="./assets/img/lupa.png" alt="lupa" class="img-fluid" style="width: 20px;">
                 </button>
             </div>
@@ -101,7 +101,7 @@
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <ul class="list-group">
+                    <ul class="list-group" id="listUser">
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             João Silva
                             <button class="btn btn-sm btn-dark" data-bs-toggle="modal" data-bs-target="#userPermissionModal">Alterar Permissão</button>
@@ -131,22 +131,22 @@
                 <div class="modal-body">
                     <form>
                         <div class="mb-3">
-                            <label for="userName" class="form-label">Nome do Usuário:</label>
-                            <input type="text" id="userName" class="form-control" value="Nome do usuário" disabled>
+                            <label for="userName" class="form-label">ID do Usuário:</label>
+                            <input type="text" id="userName" class="form-control" value="">
                         </div>
                         <div class="mb-3">
                             <label for="userPermission" class="form-label">Permissão:</label>
                             <select id="userPermission" class="form-select">
-                                <option value="leitor">Leitor</option>
-                                <option value="participante">Participante</option>
-                                <option value="admin">Admin</option>
+                                <option value="1">Leitor</option>
+                                <option value="2">Participante</option>
+                                <option value="3">Admin</option>
                             </select>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary" id="saveChangesButton">Salvar Alterações</button>
+                    <button type="button" class="btn btn-primary" onclick="newPermission()"  id="saveChangesButton">Salvar Alterações</button>
                 </div>
             </div>
         </div>
