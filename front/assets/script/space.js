@@ -78,7 +78,7 @@ async function loadQuestions() {
                     ${question.description}
                     <div>
                         <a href="question.html" class="btn btn-sm btn-dark">Ver pergunta</a>
-                        <a href="spaces.html" class="btn btn-sm btn-dark">Deletar</a>
+                        <a href="spaces.html" class="btn btn-sm btn-dark" onclick=${function() {toQuestion(question.id)}}>Deletar</a>
                     </div>
                 `
                 boxQuestion.appendChild(li);
@@ -90,6 +90,10 @@ async function loadQuestions() {
 async function toQuestion(id) {
     window.localStorage.setItem("questionId", id);
     window.location.href = "http://127.0.0.1:5500/question.html";
+}
+
+async function deleteQuestion(id) {
+    
 }
 
 loadQuestions();
