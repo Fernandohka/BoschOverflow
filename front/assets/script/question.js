@@ -18,4 +18,28 @@ async function loadAnswers() {
     });
 }
 
+async function newAnswers() {
+    let userAnwser = document.getElementById("userAnswer").ariaValueMax;
+    console.log(userAnwser)
+
+    await fetch(`http://localhost:8080/answer`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Authorization": "Bearer " + window.sessionStorage.getItem("token") },
+        body:JSON.stringify({
+            "questionId":window.localStorage.getItem("questionId"),
+            "description":userAnwser
+        })
+    }).then((res) => {
+        console.log(res)
+        if(res.status>=200 && res.status<299){
+            alert("Criado com sucesso!!")
+            return
+        }
+        alert("Erro ao criar resposta!")
+        res.JSON().then(data=>{
+            console.log(data)
+        })
+    });
+}
+
 loadAnswers()
