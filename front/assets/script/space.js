@@ -77,8 +77,8 @@ async function loadQuestions() {
                 li.innerHTML = `
                     ${question.description}
                     <div>
-                        <a href="question.html" class="btn btn-sm btn-dark">Ver pergunta</a>
-                        <a href="spaces.html" class="btn btn-sm btn-dark">Deletar</a>
+                        <a onclick="toQuestion(${question.id})" class="btn btn-sm btn-dark">Ver pergunta</a>
+                        <a class="btn btn-sm btn-dark" onclick="deleteQuestion(${question.id})"}>Deletar</a>
                     </div>
                 `
                 boxQuestion.appendChild(li);
@@ -94,6 +94,17 @@ async function toQuestion(id) {
 
 async function deleteSpace() {
     alert("Erro ao deletar espaço!!");
+}
+
+async function deleteQuestion(id) {
+    
+    await fetch(`http://localhost:8080/question/${id}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json", "Authorization": "Bearer " + window.sessionStorage.getItem("token") }
+    }).then((res) => {
+        console.log(res)
+    });
+
 }
 
 loadQuestions();
