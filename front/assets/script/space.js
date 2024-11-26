@@ -99,7 +99,14 @@ async function toQuestion(id) {
 }
 
 async function deleteSpace() {
-    alert("Erro ao deletar espaço!!");
+    await fetch(`http://localhost:8080/space/${window.localStorage.getItem("spaceId")}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json", "Authorization": "Bearer " + window.sessionStorage.getItem("token") }
+    }).then((res) => {
+        if(res.status != 200 ){
+            alert("Erro ao deletar espaço!!");
+        }
+    });
 }
 
 async function deleteQuestion(id) {
@@ -108,7 +115,10 @@ async function deleteQuestion(id) {
         method: "DELETE",
         headers: { "Content-Type": "application/json", "Authorization": "Bearer " + window.sessionStorage.getItem("token") }
     }).then((res) => {
-        console.log(res)
+        if(res.status == 403 ){
+            alert("Sem Autorização!!");
+            return;
+        }
     });
 
 }

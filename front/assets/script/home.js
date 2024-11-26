@@ -1,6 +1,6 @@
 async function loadSpaces() {
-    console.log("Bearer " + window.sessionStorage.getItem("token"))
-    await fetch("http://localhost:8080/space/get?query=&page=0&limit=65", {
+    let query = document.getElementById("querySpace").value;    
+    await fetch(`http://localhost:8080/space/get?query=${query}&page=0&limit=65`, {
         method: "GET",
         headers: { "Content-Type": "application/json", "Authorization": "Bearer " + window.sessionStorage.getItem("token") }
     }).then((res) => {
