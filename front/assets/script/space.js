@@ -18,8 +18,13 @@ async function newQuest() {
             headers: { "Content-Type": "application/json", "Authorization": "Bearer " + window.sessionStorage.getItem("token") },
             body: JSON.stringify({ "description": questionInput, "idUserSpace": spaceid })
         }).then((res) => {
+            if(res.status == 403){
+                alert("Erro ao adiconar pergunta!!");
+                return;
+            }
             res.json().then(data => {
                 alert(data.messages)
+                loadQuestions()
             })
         });
 }
